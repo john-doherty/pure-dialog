@@ -2,7 +2,7 @@
 
 [![Linked In](https://img.shields.io/badge/Linked-In-blue.svg)](https://www.linkedin.com/in/john-i-doherty) [![Twitter Follow](https://img.shields.io/twitter/follow/CambridgeMVP.svg?style=social&label=Twitter&style=plastic)](https://twitter.com/CambridgeMVP)
 
-Create dialogs with minimal effort using a new `pure-dialog` HTML tag. pure-dialog is a framework independent Web Component written in pure JavaScript _(good old ES5)_.
+Create dialogs with minimal effort using a new `pure-dialog` HTML tag _(framework independent Web Component written in pure JavaScript good old ES5)_.
 
 ## How to use
 
