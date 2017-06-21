@@ -224,10 +224,27 @@ pure-dialog is designed to be super light and only produces the following output
 </pure-dialog>
 ```
 
-To change the colour of a button for example, you could use the following:
+To change the colour of a particular button, use its value as a selector:
 
 ```css
 #example input[value="Absolutely"] { background: #880000; }
+```
+
+To change the look/feel of all dialogs to match iOS, you could use the following:
+
+```css
+pure-dialog .pure-dialog-container { border-radius: 10px; min-width: 260px; }
+pure-dialog .pure-dialog-title { padding: 20px 20px 4px 20px; text-align: center; }
+pure-dialog .pure-dialog-body { text-align: center; }
+pure-dialog .pure-dialog-button {
+  background: transparent;
+  color: #157AFB;
+  border-top: 1px solid #ccc;
+  border-radius: 0;
+  margin: 0;
+  padding: 12px;
+}
+pure-dialog .pure-dialog-button:first-child { border-right: 1px solid #ccc; }
 ```
 
 ## Contribute
