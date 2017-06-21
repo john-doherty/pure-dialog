@@ -9,11 +9,9 @@ Create dialogs with minimal effort using a new `pure-dialog` HTML tag _(framewor
 * [How to use](#how-to-use)
   * [In HTML](#in-html)
   * [In JavaScript](#or-javaScript)
-
-[Methods](#methods)
-[Events](#events)
-[Properties and attributes](#properties-and-attributes)
-
+* [Methods](#methods)
+* [Events](#events)
+* [Properties and attributes](#properties-and-attributes)
 * [Contribute](#contribute)
   * [Local development](#local-development)
   * [Testing](#testing)
