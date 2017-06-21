@@ -40,8 +40,6 @@ dialog.showModal();
 
 ### Methods
 
-Each pure-dialog element exposes the following methods:
-
 Method                                      | Description
 ------------------------------------------- | ----------------------------------------------------------------------------------
 [show()](#show-the-dialog)                  | Show the dialog
@@ -84,18 +82,18 @@ document.getElementById('example').remove();
 
 ### Events
 
-Each pure-dialog element exposes the following events. All events bubble up so it is possible to listen for pure-dialog events at the root of the DOM:
+Events bubble up so it is possible to listen for pure-dialog events at the root of the DOM:
 
-Method                                      | Description
---------------------------------------------------------------- | --------------------------------------------------------------
-[pure-dialog-button-clicked](#button-clicked) | Fires when a dialog button is clicked, `e.detail` contains button label
-[pure-dialog-close-clicked](#closed-clicked) | Fires when the dialog close button is clicked _(if present)_
-[pure-dialog-opening](#dialog-is-opening) | Fires when a dialog is about to open _(can be canceled)_
-[pure-dialog-opened](#dialog-has-opened) | Fires when a dialog has opened
-[pure-dialog-closing](#dialog-is-closing) | Fires when a dialog is about to close _(can be canceled)_
-[pure-dialog-closed](#dialog-has-closed) | Fires when a dialog is closed
+Event                                            | Description
+------------------------------------------------- | ------------------------------------------------------------------------------------
+[pure-dialog-button-clicked](#button-clicked)     | Fires when a dialog button is clicked, `e.detail` contains button label
+[pure-dialog-close-clicked](#closed-clicked)      | Fires when the dialog close button is clicked _(if present)_
+[pure-dialog-opening](#dialog-is-opening)         | Fires when a dialog is about to open _(can be canceled)_
+[pure-dialog-opened](#dialog-has-opened)          | Fires when a dialog has opened
+[pure-dialog-closing](#dialog-is-closing)         | Fires when a dialog is about to close _(can be canceled)_
+[pure-dialog-closed](#dialog-has-closed)          | Fires when a dialog is closed
 [pure-dialog-appending](#dialog-appending-to-dom) | Fires before a dialog is about to be appended to the DOM _(can be canceled)_
-[pure-dialog-removing](#dialog-removed-from-dom) | Fires before a dialog element is about to be removed from the DOM _(can be canceled)_
+[pure-dialog-removing](#dialog-removed-from-dom)  | Fires before a dialog element is about to be removed from the DOM _(can be canceled)_
 
 #### Button clicked
 
