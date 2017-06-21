@@ -12,6 +12,7 @@ Create dialogs with minimal effort using a new `pure-dialog` HTML tag _(framewor
   * [Methods](#methods)
   * [Events](#events)
   * [Properties and attributes](#properties-and-attributes)
+  * [Styling](#styling)
 * [Contribute](#contribute)
   * [Local development](#local-development)
   * [Testing](#testing)
@@ -26,7 +27,7 @@ Add the [document.registerElement](polyfills/document-register-element.js) polyf
 ### In HTML
 
 ```html
-<pure-dialog id="example" title="Pure Dialog Demo" buttons="Absolutely!, No">
+<pure-dialog id="example" title="Pure Dialog Demo" buttons="Absolutely, No">
 Is this project worth a star?
 </pure-dialog>
 ```
@@ -41,7 +42,7 @@ var dialog = document.createElement('pure-dialog');
 dialog.id = 'example';
 dialog.title = 'Pure Dialog Demo';
 dialog.innerHTML = 'Is this project worth a star?';
-dialog.buttons = 'Absolutely!, No';
+dialog.buttons = 'Absolutely, No';
 dialog.closeButton = false;
 
 // append to DOM
@@ -88,7 +89,7 @@ Assuming `var dialog = document.getElementById('example')`:
 // detect button clicks on the #example element
 dialog.addEventListener('pure-dialog-button-clicked', function(e) {
 
-  if (e.detail === 'Absolutely!') {
+  if (e.detail === 'Absolutely') {
     // Absolutely was clicked!
   }
   else {
@@ -180,7 +181,7 @@ var dialogTitle = document.getElementById('example').title;
 
 ```js
 // set dialog buttons
-document.getElementById('example').buttons = 'Absolutely!, No';
+document.getElementById('example').buttons = 'Absolutely, No';
 
 // get dialog buttons
 var dialogButtons = document.getElementById('example').buttons;
@@ -204,6 +205,23 @@ document.getElementById('example').innerHTML = 'Hello World!';
 
 // get dialog body HTML
 var dialogBody = document.getElementById('example').innerHTML;
+```
+
+## Styling
+
+pure-dialog is designed to be super light and only produces the following output, making it easy to style:
+
+```html
+<pure-dialog id="example" title="Pure Dialog Demo" buttons="Yes, No">
+  <div class="pure-dialog-container">
+    <div class="pure-dialog-title">Pure Dialog Demo</div>
+    <div class="pure-dialog-body">Is this project worth a star?</div>
+    <div class="pure-dialog-buttons">
+      <input type="button" value="Absolutely" class="pure-dialog-button">
+      <input type="button" value="No" class="pure-dialog-button">
+    </div>
+  </div>
+</pure-dialog>
 ```
 
 ## Contribute
