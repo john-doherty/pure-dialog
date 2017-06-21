@@ -1,3 +1,10 @@
+/*!
+ * pure-dialog - v@version@
+ * Pure JavaScript HTML dialog as a Web Component
+ * https://github.com/john-doherty/pure-dialog
+ * @author John Doherty <www.johndoherty.info>
+ * @license MIT
+ */
 pure-dialog {
     z-index: 999;
     visibility: hidden;
