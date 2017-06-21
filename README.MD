@@ -13,7 +13,7 @@ If you require IE9+/Safari support you'll also need the [document.registerElemen
 ### In HTML
 
 ```html
-<pure-dialog id="example" title="Pure Dialog Demo" close-button="false" buttons="Absolutely!, No">
+<pure-dialog id="example" title="Pure Dialog Demo" buttons="Absolutely!, No">
 Is this project worth a star?
 </pure-dialog>
 ```
