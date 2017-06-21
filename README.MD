@@ -6,9 +6,7 @@ Create dialogs with minimal effort using a new `pure-dialog` HTML tag _(framewor
 
 ## How to use
 
-Add the [dist/pure-dialog.min.js](dist/pure-dialog.min.js) and [dist/pure-dialog.min.css](dist/pure-dialog.min.css) files into your project. 
-
-If you require IE9+/Safari support you'll also need the [document.registerElement](polyfills/document-register-element.js) polyfill.
+Add the [document.registerElement](polyfills/document-register-element.js) polyfill to your project to add support for Web Components. Next add  [dist/pure-dialog.min.js](dist/pure-dialog.min.js) and [dist/pure-dialog.min.css](dist/pure-dialog.min.css) files.
 
 ### In HTML
 
