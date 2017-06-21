@@ -80,10 +80,12 @@ document.getElementById('example').remove();
 
 ### Events
 
-All pure-dialog events bubble up so it is possible to listen for a pure-dialog event on the element itself or at the root of the DOM. Assuming `var dialog = document.getElementById('example')`:
+All pure-dialog events bubble up so it is possible to listen for a pure-dialog events at the root of the DOM.
+
+Assuming `var dialog = document.getElementById('example')`:
 
 ```js
-// detect button clicks
+// detect button clicks on the #example element
 dialog.addEventListener('pure-dialog-button-clicked', function(e) {
 
   if (e.detail === 'Absolutely!') {
@@ -93,6 +95,11 @@ dialog.addEventListener('pure-dialog-button-clicked', function(e) {
     // Absolutely was not clicked, stop the dialog from closing ;)
     e.preventDefault();
   }
+});
+
+// detect button click on all dialogs
+document.addEventListener('pure-dialog-button-clicked', function(e) {
+  console.log(e.detail); // log button label
 });
 ```
 
