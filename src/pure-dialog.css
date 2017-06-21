@@ -66,15 +66,15 @@ pure-dialog .pure-dialog-buttons {
 pure-dialog .pure-dialog-button {
     border: 0;
     color: #333;
-    border-radius: 0;
     outline: 0;
     font-size: 14px;
-    margin: 0;
-    padding: 14px;
+    padding: 10px;
     display: inline-block;
     width: 100%;
     cursor: pointer;
+    margin: 4px;
     -webkit-appearance: none;
+    border-radius: 4px;
 }
 
 pure-dialog.pure-dialog-show {
