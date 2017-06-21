@@ -80,12 +80,13 @@ document.getElementById('example').remove();
 
 ### Events
 
-All pure-dialog events bubble up so it is possible to listen for a pure-dialog event on the element itself or at the root of the DOM:
+All pure-dialog events bubble up so it is possible to listen for a pure-dialog event on the element itself or at the root of the DOM. Assuming `var dialog = document.getElementById('example')`:
 
 ```js
 // detect button clicks
-document.getElementById('example').addEventListener('pure-dialog-button-clicked', function(e) {
-  if (e.detail === 'Absolutely') {
+dialog.addEventListener('pure-dialog-button-clicked', function(e) {
+
+  if (e.detail === 'Absolutely!') {
     // Absolutely was clicked!
   }
   else {
@@ -97,7 +98,7 @@ document.getElementById('example').addEventListener('pure-dialog-button-clicked'
 
 ```js
 // detect closed clicked
-document.addEventListener('pure-dialog-close-clicked', function(e) {
+dialog.addEventListener('pure-dialog-close-clicked', function(e) {
   console.log(e.target.id) // console log the ID of the dialog
   // use e.preventDefault() to stop the dialog from closing
 });
@@ -105,7 +106,7 @@ document.addEventListener('pure-dialog-close-clicked', function(e) {
 
 ```js
 // detect dialog is opening
-document.addEventListener('pure-dialog-opening', function(e) {
+dialog.addEventListener('pure-dialog-opening', function(e) {
   console.log(e.target.id) // console log the ID of the opening dialog
   // use e.preventDefault() to stop the dialog from opening
 });
@@ -113,14 +114,14 @@ document.addEventListener('pure-dialog-opening', function(e) {
 
 ```js
 // detect dialog has opened
-document.addEventListener('pure-dialog-opened', function(e) {
+dialog.addEventListener('pure-dialog-opened', function(e) {
   console.log(e.target.id) // console log the ID of the opened dialog
 });
 ```
 
 ```js
 // detect dialog is closing
-document.addEventListener('pure-dialog-closing', function(e) {
+dialog.addEventListener('pure-dialog-closing', function(e) {
   console.log(e.target.id) // console log the ID of the closing dialog
   // use e.preventDefault() to stop the dialog from closing
 });
@@ -128,14 +129,14 @@ document.addEventListener('pure-dialog-closing', function(e) {
 
 ```js
 // detect dialog has closed
-document.addEventListener('pure-dialog-closed', function(e) {
+dialog.addEventListener('pure-dialog-closed', function(e) {
   console.log(e.target.id) // console log the ID of the closed dialog
 });
 ```
 
 ```js
 // detect dialog is appending to DOM
-document.addEventListener('pure-dialog-appending', function(e) {
+dialog.addEventListener('pure-dialog-appending', function(e) {
   console.log(e.target.id) // console log the ID of the dialog about to be inserted
   // use e.preventDefault() to stop the dialog from been inserted
 });
@@ -143,7 +144,7 @@ document.addEventListener('pure-dialog-appending', function(e) {
 
 ```js
 // detect dialog removed from DOM
-document.addEventListener('pure-dialog-removing', function(e) {
+dialog.addEventListener('pure-dialog-removing', function(e) {
   console.log(e.target.id) // console log the ID of the dialog about to be removed
   // use e.preventDefault() to stop the dialog from been removed
 });
