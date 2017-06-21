@@ -1,12 +1,13 @@
 pure-dialog {
     z-index: 999;
     visibility: hidden;
-    /*animation-duration: 0.2s;*/
-    /*animation-fill-mode: forwards;*/
-    /*animation-name: pure-dialog-fadeOut;*/
 }
 
-pure-dialog.pure-dialog-ismodal {
+pure-dialog[open] {
+    visibility: visible;
+}
+
+pure-dialog[open][modal] {
     position: absolute; /*fixed;*/
     top: 0;
     right: 0;
@@ -75,9 +76,4 @@ pure-dialog .pure-dialog-button {
     margin: 4px;
     -webkit-appearance: none;
     border-radius: 4px;
-}
-
-pure-dialog.pure-dialog-show {
-    visibility: visible;
-    /*animation-name: pure-dialog-fadeIn;*/
 }

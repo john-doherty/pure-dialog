@@ -118,7 +118,7 @@
         var allow = this.dispatchEvent(new CustomEvent('pure-dialog-opening', { bubbles: true, cancelable: true }));
 
         if (allow) {
-            this.classList.add('pure-dialog-show');
+            this.setAttribute('open', 'true');
             this.dispatchEvent(new CustomEvent('pure-dialog-opened', { bubbles: true, cancelable: true }));
         }
     };
@@ -133,8 +133,8 @@
         var allow = this.dispatchEvent(new CustomEvent('pure-dialog-opening', { bubbles: true, cancelable: true }));
 
         if (allow) {
-            this.classList.add('pure-dialog-ismodal');
-            this.show();
+            this.setAttribute('open', 'true');
+            this.setAttribute('modal', 'true');
             this.dispatchEvent(new CustomEvent('pure-dialog-opened', { bubbles: true, cancelable: true }));
         }
     };
@@ -149,8 +149,8 @@
         var allow = this.dispatchEvent(new CustomEvent('pure-dialog-closing', { bubbles: true, cancelable: true }));
 
         if (allow) {
-            this.classList.remove('pure-dialog-show');
-            this.classList.remove('pure-dialog-ismodal');
+            this.removeAttribute('open');
+            this.removeAttribute('modal');
             this.dispatchEvent(new CustomEvent('pure-dialog-closed', { bubbles: true, cancelable: true }));
         }
     };
