@@ -43,11 +43,11 @@ dialog.showModal();
 Each pure-dialog element exposes the following methods:
 
 Method                                      | Description
-------------------------------------------- | ---------------------------------------------------------
+------------------------------------------- | ----------------------------------------------------------------------------------
 [show()](#show-the-dialog)                  | Show the dialog
 [showModal()](#show-the-dialog-as-a-modal)  | Show the dialog as a modal
 [close()](#close-the-dialog)                | Close the dialog
-[appendToDOM()](#add-the-dialog-to-the-dom) | `.appendToDOM()` helps avoid stacking issues by ensuring dialog is always appended to body
+[appendToDOM()](#add-the-dialog-to-the-dom) | Helps avoid stacking issues by ensuring dialog is always appended to document body
 [remove()](#remove-the-dialog-from-the-dom) | Remove the dialog from the DOM
 
 #### Show the dialog
