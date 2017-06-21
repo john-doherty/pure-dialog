@@ -38,7 +38,7 @@
             }
         },
 
-        /** @property {string} pure-dialog.closeButton - show or hide the dialog close icon */
+        /** @property {boolean} pure-dialog.closeButton - show or hide the dialog close icon */
         closeButton: {
             get: function () {
                 return (this.getAttribute('close-button') === 'true');
@@ -189,9 +189,9 @@
         }
     };
 
-    /*------------------------*/
+    /*-----------------*/
     /* PRIVATE METHODS */
-    /*------------------------*/
+    /*-----------------*/
 
     /**
      * Render body takes care of creating the core elements and also ensuring the literal html is inserted into a wrapper

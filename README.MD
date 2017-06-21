@@ -4,6 +4,21 @@
 
 Create dialogs with minimal effort using a new `pure-dialog` HTML tag _(framework independent Web Component written in pure JavaScript good old ES5)_.
 
+**Table of Contents**
+
+* [How to use](#how-to-use)
+  * [In HTML](#in-html)
+  * [In JavaScript](#or-javaScript)
+  * [Methods](#methods)
+  * [Events](#events)
+  * [Properties and attributes](#properties-and-attributes)
+* [Contribute](#contribute)
+  * [Local development](#local-development)
+  * [Testing](#testing)
+  * [Generate .min files](#generate-min-files)
+* [Reporting bugs](#reporting-bugs)
+* [Pull requests](#pull-requests)
+
 ## How to use
 
 Add the [document.registerElement](polyfills/document-register-element.js) polyfill to your project to add support for Web Components. Next add  [dist/pure-dialog.min.js](dist/pure-dialog.min.js) and [dist/pure-dialog.min.css](dist/pure-dialog.min.css) files.
@@ -250,7 +265,7 @@ Tests are written using [jsdom](https://github.com/tmpvar/jsdom)/[jasmine](https
 | `pure-dialog-event-spec.js`     | Test pure-dialog events fire in the correct order
 | `pure-dialog-method-spec.js`    | Tests that execute methods and verify their functionality by inspecting rendered output
 
-### Generate .min Files
+### Generate .min files
 
 The minified [pure-dialog.min.js](dist/pure-dialog.min.js) and [pure-dialog.min.css](dist/pure-dialog.min.css) files included in this project are the latest version. To generate new .min files, execute the following:
 
@@ -260,11 +275,11 @@ npm run build
 
 The version number is picked up from the `package.json` file.
 
-## Reporting Bugs
+## Reporting bugs
 
 If you find a bug, please create an [issue](https://github.com/john-doherty/pure-dialog/issues) _(include a [jsfiddle](https://jsfiddle.net) if possible)_.
 
-## Pull Requests
+## Pull requests
 
 Please ensure your work is covered with unit test(s) and your code follows the ESLint coding style defined in the [package.json](package.json) file.
 
