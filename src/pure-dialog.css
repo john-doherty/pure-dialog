@@ -1,0 +1,83 @@
+pure-dialog {
+    z-index: 999;
+    visibility: hidden;
+    /*animation-duration: 0.2s;*/
+    /*animation-fill-mode: forwards;*/
+    /*animation-name: pure-dialog-fadeOut;*/
+}
+
+pure-dialog.pure-dialog-ismodal {
+    position: absolute; /*fixed;*/
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(50, 50, 50, 1);
+    visibility: visible;
+}
+
+pure-dialog .pure-dialog-close {
+    height: 24px;
+    width: 24px;
+    background-color: red;
+    background-image: url('img/icon-close.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+pure-dialog .pure-dialog-container {
+    background: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 3px;
+    overflow: hidden;
+    padding-bottom: 40px;
+    box-shadow: 0 1px 6px rgba(0,0,0,.06),0 2px 32px rgba(0,0,0,.16)!important;
+}
+
+pure-dialog .pure-dialog-title {
+    font-size: 16px;
+    line-height: 20px;
+    padding: 20px;
+    font-weight: bold;
+}
+
+pure-dialog .pure-dialog-body {
+    padding: 0 20px 20px 20px;
+    font-size: 16px;
+    color: #333;
+}
+
+pure-dialog .pure-dialog-buttons {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    background: #fff;
+}
+
+pure-dialog .pure-dialog-button {
+    border: 0;
+    color: #333;
+    border-radius: 0;
+    outline: 0;
+    font-size: 14px;
+    margin: 0;
+    padding: 14px;
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+
+pure-dialog.pure-dialog-show {
+    visibility: visible;
+    /*animation-name: pure-dialog-fadeIn;*/
+}

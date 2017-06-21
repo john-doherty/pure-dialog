@@ -1,0 +1,84 @@
+<!doctype>
+<html>
+    <head>
+        <!-- polyfills -->
+        <script src="polyfills/document-register-element.js"></script>
+
+        <!-- pure-dialog component -->
+        <script src="src/pure-dialog.js"></script>
+        <link href="src/pure-dialog.css" rel="stylesheet" />
+        <!-- custom styles for this page -->
+        <style>
+            html {
+                height: 100%;
+                min-height: 100%;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+
+            body {
+                padding-bottom: 40px;
+                font-size: 14px;
+                font-family: tahoma;
+                color: #333;
+            }
+
+            pre {
+                display: block;
+                padding: 9.5px;
+                margin: 0 0 10px;
+                font-size: 13px;
+                line-height: normal;
+                color: #333;
+                word-break: break-all;
+                word-wrap: break-word;
+                background-color: #f5f5f5;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 14px;
+                border-radius: 3px;
+                -webkit-appearance: none;
+                border: 1px solid #ccc;
+                background: #f8f8f8;
+            }
+        </style>
+        <script>
+            function createDialogViaJs() {
+
+                var dialog = document.createElement('pure-dialog');
+                dialog.title = "Created via JS";
+                dialog.buttons = 'Okay';
+
+                dialog.addEventListener('button-clicked', function(e) {
+                    alert(e.details + ' clicked!');
+                });
+                
+                document.body.appendChild(dialog);
+
+                dialog.show();
+            }
+        </script>
+    </head>
+
+    <body>
+        <h1>pure-dialog demo</h1>
+        <p>
+            This won't show anything visually. You need to use JavaScript APIs to show / hide it.
+        </p>
+        <pre>
+&lt;pure-dialog id="example" title="Pure Dialog Demo" buttons="Yes, No"&gt;Will you star this repo?&lt;/pure-dialog&gt;
+        </pre>
+        <pre>
+&lt;button onclick="document.querySelector('#example').showModal()"&gt;show&lt;/button&gt;
+&lt;button onclick="document.querySelector('#example').showModal()"&gt;showModal&lt;/button&gt;
+        </pre>
+        <pure-dialog id="example" title="Pure Dialog Demo" buttons="Yes, No">Will you star this repo?</pure-dialog>
+        <button onclick="document.querySelector('#example').show()">show</button>
+        <button onclick="document.querySelector('#example').showModal()">showModal</button>
+    </body>
+</html>
