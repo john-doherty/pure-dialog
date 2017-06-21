@@ -9,9 +9,9 @@ Create dialogs with minimal effort using a new `pure-dialog` HTML tag _(framewor
 * [How to use](#how-to-use)
   * [In HTML](#in-html)
   * [In JavaScript](#or-javaScript)
-* [Methods](#methods)
-* [Events](#events)
-* [Properties and attributes](#properties-and-attributes)
+  * [Methods](#methods)
+  * [Events](#events)
+  * [Properties and attributes](#properties-and-attributes)
 * [Contribute](#contribute)
   * [Local development](#local-development)
   * [Testing](#testing)
@@ -51,66 +51,39 @@ dialog.appendToDOM();
 dialog.showModal();
 ```
 
-## Methods
-
-Method                                      | Description
-------------------------------------------- | ----------------------------------------------------------------------------------
-[show()](#show-the-dialog)                  | Show the dialog
-[showModal()](#show-the-dialog-as-a-modal)  | Show the dialog as a modal
-[close()](#close-the-dialog)                | Close the dialog
-[appendToDOM()](#add-the-dialog-to-the-dom) | Helps avoid stacking issues by ensuring dialog is always appended to document body
-[remove()](#remove-the-dialog-from-the-dom) | Remove the dialog from the DOM
-
-### Show the dialog
+### Methods
 
 ```js
+// Show the dialog
 document.getElementById('example').show();
 ```
 
-### Show the dialog as a modal
-
 ```js
+// Show the dialog as a modal
 document.getElementById('example').showModal();
 ```
 
-### Close the dialog
-
 ```js
+// Close the dialog
 document.getElementById('example').close();
 ```
 
-### Add the dialog to the DOM
-
 ```js
-// this method exists to help avoid stacking issues
-// by ensuring the dialog is always the last tag in the body
+// Add the dialog to the DOM (not require if using HTML literal)
 document.getElementById('example').appendToDOM();
 ```
 
-### Remove the dialog from the DOM
-
 ```js
+// Remove the dialog from the DOM
 document.getElementById('example').remove();
 ```
 
-## Events
+### Events
 
 Events bubble up so it is possible to listen for pure-dialog events at the root of the DOM:
 
-Event                                            | Description
-------------------------------------------------- | ------------------------------------------------------------------------------------
-[pure-dialog-button-clicked](#button-clicked)     | Fires when a dialog button is clicked, `e.detail` contains button label
-[pure-dialog-close-clicked](#closed-clicked)      | Fires when the dialog close button is clicked _(if present)_
-[pure-dialog-opening](#dialog-is-opening)         | Fires when a dialog is about to open _(can be canceled)_
-[pure-dialog-opened](#dialog-has-opened)          | Fires when a dialog has opened
-[pure-dialog-closing](#dialog-is-closing)         | Fires when a dialog is about to close _(can be canceled)_
-[pure-dialog-closed](#dialog-has-closed)          | Fires when a dialog is closed
-[pure-dialog-appending](#dialog-appending-to-dom) | Fires before a dialog is about to be appended to the DOM _(can be canceled)_
-[pure-dialog-removing](#dialog-removed-from-dom)  | Fires before a dialog element is about to be removed from the DOM _(can be canceled)_
-
-### Button clicked
-
 ```js
+// Button clicked
 document.getElementById('example').addEventListener('pure-dialog-button-clicked', function(e) {
   if (e.detail === 'Absolutely') {
     // Absolutely was clicked!
@@ -122,69 +95,61 @@ document.getElementById('example').addEventListener('pure-dialog-button-clicked'
 });
 ```
 
-### Closed clicked
-
 ```js
-// The event bubbles so you can listen on the DOM level or directly on the element
+// Closed clicked
 document.addEventListener('pure-dialog-close-clicked', function(e) {
-    // FYI e.target === this === dialog that triggered the event
-    // use e.preventDefault() to stop the dialog from closing
+  console.log(e.target.id) // console log the ID of the dialog
+  // use e.preventDefault() to stop the dialog from closing
 });
 ```
 
-### Dialog is opening
-
 ```js
+// Dialog is opening
 document.addEventListener('pure-dialog-opening', function(e) {
   console.log(e.target.id) // console log the ID of the opening dialog
   // use e.preventDefault() to stop the dialog from opening
 });
 ```
 
-### Dialog has opened
-
 ```js
+// Dialog has opened
 document.addEventListener('pure-dialog-opened', function(e) {
   console.log(e.target.id) // console log the ID of the opened dialog
 });
 ```
 
-### Dialog is closing
-
 ```js
+// Dialog is closing
 document.addEventListener('pure-dialog-closing', function(e) {
   console.log(e.target.id) // console log the ID of the closing dialog
   // use e.preventDefault() to stop the dialog from closing
 });
 ```
 
-### Dialog has closed
-
 ```js
+// Dialog has closed
 document.addEventListener('pure-dialog-closed', function(e) {
   console.log(e.target.id) // console log the ID of the closed dialog
 });
 ```
 
-### Dialog appending to DOM
-
 ```js
+// Dialog appending to DOM
 document.addEventListener('pure-dialog-appending', function(e) {
   console.log(e.target.id) // console log the ID of the dialog about to be inserted
   // use e.preventDefault() to stop the dialog from been inserted
 });
 ```
 
-### Dialog removed from DOM
-
 ```js
+// Dialog removed from DOM
 document.addEventListener('pure-dialog-removing', function(e) {
   console.log(e.target.id) // console log the ID of the dialog about to be removed
   // use e.preventDefault() to stop the dialog from been removed
 });
 ```
 
-## Properties and attributes
+### Properties and attributes
 
 Property                                        | Attribute      | Description                            | Type      | Default
 ----------------------------------------------- | -------------- | -------------------------------------- | --------- | --------
@@ -193,7 +158,7 @@ Property                                        | Attribute      | Description  
 [closeButton](#get/set-close-button-visibility) | `close-button` | If true, renders a close button        | _boolean_ | `false`
 [innerHTML](#getset-dialog-body-html)           | -              | Injects HTML into body of dialog       | _string_  | _empty_
 
-### Get/set title
+#### Get/set title
 
 ```js
 // set dialog title
@@ -203,7 +168,7 @@ document.getElementById('example').title = 'Pure Dialog Demo';
 var dialogTitle = document.getElementById('example').title;
 ```
 
-### Get/set buttons
+#### Get/set buttons
 
 ```js
 // set dialog buttons
@@ -213,7 +178,7 @@ document.getElementById('example').buttons = 'Absolutely!, No';
 var dialogButtons = document.getElementById('example').buttons;
 ```
 
-### Get/set close button visibility
+#### Get/set close button visibility
 
 ```js
 // set close button visibility
@@ -223,7 +188,7 @@ document.getElementById('example').closeButton = true;
 var closeButtonStatus = document.getElementById('example').closeButton;
 ```
 
-### Get/set dialog body HTML
+#### Get/set dialog body HTML
 
 ```js
 // set dialog body HTML
