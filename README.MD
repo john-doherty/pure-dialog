@@ -224,6 +224,12 @@ pure-dialog is designed to be super light and only produces the following output
 </pure-dialog>
 ```
 
+To change the colour of a button for example, you could use the following:
+
+```css
+#example input[value="Absolutely"] { background: #880000; }
+```
+
 ## Contribute
 
 ### Local development
