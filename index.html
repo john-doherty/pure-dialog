@@ -26,8 +26,8 @@
 
             pre {
                 display: block;
-                padding: 9.5px;
-                margin: 0 0 10px;
+                padding: 10px;
+                margin: 10px 0;
                 font-size: 13px;
                 line-height: normal;
                 color: #333;
@@ -42,9 +42,9 @@
                 padding: 10px 20px;
                 font-size: 14px;
                 border-radius: 3px;
-                -webkit-appearance: none;
-                border: 1px solid #ccc;
-                background: #f8f8f8;
+                /*-webkit-appearance: none;*/
+                /*border: 1px solid #ccc;
+                background: #f8f8f8;*/
             }
         </style>
         <script>
@@ -54,11 +54,11 @@
                 dialog.title = "Created via JS";
                 dialog.buttons = 'Okay';
 
-                dialog.addEventListener('button-clicked', function(e) {
-                    alert(e.details + ' clicked!');
+                dialog.addEventListener('pure-dialog-button-clicked', function(e) {
+                    alert(e.detail + ' clicked!');
                 });
                 
-                document.body.appendChild(dialog);
+                dialog.appendToDOM();
 
                 dialog.show();
             }
@@ -70,15 +70,35 @@
         <p>
             This won't show anything visually. You need to use JavaScript APIs to show / hide it.
         </p>
-        <pre>
-&lt;pure-dialog id="example" title="Pure Dialog Demo" buttons="Yes, No"&gt;Will you star this repo?&lt;/pure-dialog&gt;
-        </pre>
-        <pre>
-&lt;button onclick="document.querySelector('#example').showModal()"&gt;show&lt;/button&gt;
+<pre>
+&lt;pure-dialog id="example" title="Pure Dialog Demo" buttons="Yes, No"&gt;
+    Will you star this repo?
+&lt;/pure-dialog&gt;
+</pre>
+<pre>
+&lt;button onclick="document.querySelector('#example').show()"&gt;show&lt;/button&gt;
+</pre>
+<button onclick="document.querySelector('#example').show()">show</button>
+<pre>
 &lt;button onclick="document.querySelector('#example').showModal()"&gt;showModal&lt;/button&gt;
-        </pre>
-        <pure-dialog id="example" title="Pure Dialog Demo" buttons="Yes, No">Will you star this repo?</pure-dialog>
-        <button onclick="document.querySelector('#example').show()">show</button>
-        <button onclick="document.querySelector('#example').showModal()">showModal</button>
+</pre>
+<button onclick="document.querySelector('#example').showModal()">showModal</button>
+<pre>
+&lt;script&gt;
+
+// listen for button clicks in any dialog!
+document.addEventListener('pure-dialog-button-clicked', function(e) {
+    alert(e.detail + ' clicked!');
+});
+&lt;/script&gt;
+</pre>
+    <script>
+        document.addEventListener('pure-dialog-button-clicked', function(e) {
+            alert(e.detail + ' clicked!');
+        });
+    </script>
+    <pure-dialog id="example" title="Pure Dialog Demo" buttons="Yes, No">Will you star this repo?</pure-dialog>
+        
+        
     </body>
 </html>
