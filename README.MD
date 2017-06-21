@@ -230,7 +230,7 @@ To change the colour of a particular button, use its value as a selector:
 #example input[value="Absolutely"] { background: #880000; }
 ```
 
-To change the look/feel of all dialogs to match iOS, you could use the following:
+The following CSS will change the look/feel of all pure-dialog's to match iOS:
 
 ```css
 pure-dialog .pure-dialog-container { border-radius: 10px; min-width: 260px; }
