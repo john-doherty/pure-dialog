@@ -84,7 +84,7 @@ document.getElementById('example').remove();
 
 ### Events
 
-Each pure-dialog element exposes the following events, however all events bubble up so it is possible to listen for pure-dialog events at the root of the DOM:
+Each pure-dialog element exposes the following events. All events bubble up so it is possible to listen for pure-dialog events at the root of the DOM:
 
 Method                                      | Description
 --------------------------------------------------------------- | --------------------------------------------------------------
@@ -256,7 +256,7 @@ Tests are written using [jsdom](https://github.com/tmpvar/jsdom)/[jasmine](https
 
 ### Generate .min Files
 
-The minified [pure-dialog.min.js](dist/pure-dialog.min.js) and [pure-dialog.min.css](dist/pure-dialog.min.css) files included in this project are the latest version. To generate .min files, execute the following:
+The minified [pure-dialog.min.js](dist/pure-dialog.min.js) and [pure-dialog.min.css](dist/pure-dialog.min.css) files included in this project are the latest version. To generate new .min files, execute the following:
 
 ```bash
 npm run build
@@ -270,7 +270,7 @@ If you find a bug, please create an [issue](https://github.com/john-doherty/pure
 
 ## Pull Requests
 
-Feel free to submit a pull requests, but please ensure your work is covered with unit tests and your code follows the current ESLint coding style defined in the [package.json](package.json) file.
+Please ensure your work is covered with unit test(s) and your code follows the ESLint coding style defined in the [package.json](package.json) file.
 
 ## License
 
