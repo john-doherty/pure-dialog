@@ -6,9 +6,9 @@ Create dialogs with minimal effort using a new `pure-dialog` HTML tag. pure-dial
 
 ## How to use
 
-### Install
+Add the [dist/pure-dialog.min.js](dist/pure-dialog.min.js) and [dist/pure-dialog.min.css](dist/pure-dialog.min.css) files into your project. 
 
-Add the [dist/pure-dialog.min.js](dist/pure-dialog.min.js) and [dist/pure-dialog.min.css](dist/pure-dialog.min.css) files into your project. If you require IE9+/Safari support you'll also need the [document.registerElement](polyfills/document-register-element.js) polyfill.
+If you require IE9+/Safari support you'll also need the [document.registerElement](polyfills/document-register-element.js) polyfill.
 
 ### In HTML
 
@@ -27,6 +27,7 @@ var dialog = document.createElement('pure-dialog');
 // set its properties
 dialog.id = 'example';
 dialog.title = 'Pure Dialog Demo';
+dialog.innerHTML = 'Is this project worth a star?';
 dialog.buttons = 'Absolutely!, No';
 dialog.closeButton = false;
 
@@ -87,16 +88,16 @@ Each pure-dialog element exposes the following events, however all events bubble
 
 Method                                      | Description
 --------------------------------------------------------------- | --------------------------------------------------------------
-[pure-dialog-button-clicked](#listen-for-button-clicks) | Fires when a dialog button is clicked, `e.detail` contains button label
-[pure-dialog-close-clicked](#detect-when-closed-clicked) | Fires when the dialog close button is clicked _(if present)_
-[pure-dialog-opening](#detect-when-a-dialog-is-opening) | Fires when a dialog is about to open _(can be canceled)_
-[pure-dialog-opened](#detect-when-a-dialog-has-opened) | Fires when a dialog has opened
-[pure-dialog-closing](#detect-when-a-dialog-is-closing) | Fires when a dialog is about to close _(can be canceled)_
-[pure-dialog-closed](#detect-when-a-dialog-has-closed) | Fires when a dialog is closed
-[pure-dialog-appending](#detect-when-a-dialog-is-about-to-be-inserted-into-dom) | Fires before a dialog is about to be appended to the DOM _(can be canceled)_
-[pure-dialog-removing](#detect-when-a-dialog-is-about-to-be-removed-from-the-dom) | Fires before a dialog element is about to be removed from the DOM _(can be canceled)_
+[pure-dialog-button-clicked](#button-clicked) | Fires when a dialog button is clicked, `e.detail` contains button label
+[pure-dialog-close-clicked](#closed-clicked) | Fires when the dialog close button is clicked _(if present)_
+[pure-dialog-opening](#dialog-is-opening) | Fires when a dialog is about to open _(can be canceled)_
+[pure-dialog-opened](#dialog-has-opened) | Fires when a dialog has opened
+[pure-dialog-closing](#dialog-is-closing) | Fires when a dialog is about to close _(can be canceled)_
+[pure-dialog-closed](#dialog-has-closed) | Fires when a dialog is closed
+[pure-dialog-appending](#dialog-appending-to-dom) | Fires before a dialog is about to be appended to the DOM _(can be canceled)_
+[pure-dialog-removing](#dialog-removed-from-dom) | Fires before a dialog element is about to be removed from the DOM _(can be canceled)_
 
-#### Listen for button clicks
+#### Button clicked
 
 ```js
 document.getElementById('example').addEventListener('pure-dialog-button-clicked', function(e) {
@@ -110,7 +111,7 @@ document.getElementById('example').addEventListener('pure-dialog-button-clicked'
 });
 ```
 
-#### Detect when closed clicked
+#### Closed clicked
 
 ```js
 // The event bubbles so you can listen on the DOM level or directly on the element
@@ -120,7 +121,7 @@ document.addEventListener('pure-dialog-close-clicked', function(e) {
 });
 ```
 
-#### Detect when a dialog is opening
+#### Dialog is opening
 
 ```js
 document.addEventListener('pure-dialog-opening', function(e) {
@@ -129,7 +130,7 @@ document.addEventListener('pure-dialog-opening', function(e) {
 });
 ```
 
-#### Detect when a dialog has opened
+#### Dialog has opened
 
 ```js
 document.addEventListener('pure-dialog-opened', function(e) {
@@ -137,7 +138,7 @@ document.addEventListener('pure-dialog-opened', function(e) {
 });
 ```
 
-#### Detect when a dialog is closing
+#### Dialog is closing
 
 ```js
 document.addEventListener('pure-dialog-closing', function(e) {
@@ -146,7 +147,7 @@ document.addEventListener('pure-dialog-closing', function(e) {
 });
 ```
 
-#### Detect when a dialog has closed
+#### Dialog has closed
 
 ```js
 document.addEventListener('pure-dialog-closed', function(e) {
@@ -154,7 +155,7 @@ document.addEventListener('pure-dialog-closed', function(e) {
 });
 ```
 
-#### Detect when a dialog is about to be inserted into DOM
+#### Dialog appending to DOM
 
 ```js
 document.addEventListener('pure-dialog-appending', function(e) {
@@ -163,7 +164,7 @@ document.addEventListener('pure-dialog-appending', function(e) {
 });
 ```
 
-#### Detect when a dialog is about to be removed from the DOM
+#### Dialog removed from DOM
 
 ```js
 document.addEventListener('pure-dialog-removing', function(e) {
@@ -174,35 +175,51 @@ document.addEventListener('pure-dialog-removing', function(e) {
 
 ### Properties and attributes
 
-Property                          | Attribute      | Description                            | Type      | Default
---------------------------------- | -------------- | -------------------------------------- | --------- | --------
-[title](#set-title)               | `title`        | The dialog title                       | _string_  | _empty_
-[buttons](#set-buttons)           | `buttons`      | Comma separated list of button labels  | _string_  | _empty_
-[closeButton](#show-close-button) | `close-button` | If true, renders a close button        | _boolean_ | `false`
-[innerHTML](#innerhtml)           | -              | Injects HTML into body of dialog       | _string_  | _empty_
+Property                                        | Attribute      | Description                            | Type      | Default
+----------------------------------------------- | -------------- | -------------------------------------- | --------- | --------
+[title](#getset-title)                          | `title`        | The dialog title                       | _string_  | _empty_
+[buttons](#getset-buttons)                      | `buttons`      | Comma separated list of button labels  | _string_  | _empty_
+[closeButton](#get/set-close-button-visibility) | `close-button` | If true, renders a close button        | _boolean_ | `false`
+[innerHTML](#getset-dialog-body-html)           | -              | Injects HTML into body of dialog       | _string_  | _empty_
 
-#### Set title
+#### Get/set title
 
 ```js
+// set dialog title
 document.getElementById('example').title = 'Pure Dialog Demo';
+
+// get dialog title
+var dialogTitle = document.getElementById('example').title;
 ```
 
-#### Set buttons
+#### Get/set buttons
 
 ```js
+// set dialog buttons
 document.getElementById('example').buttons = 'Absolutely!, No';
+
+// get dialog buttons
+var dialogButtons = document.getElementById('example').buttons;
 ```
 
-#### Show close button
+#### Get/set close button visibility
 
 ```js
+// set close button visibility
 document.getElementById('example').closeButton = true;
+
+// get close button visibility
+var closeButtonStatus = document.getElementById('example').closeButton;
 ```
 
-#### Set dialog body
+#### Get/set dialog body HTML
 
 ```js
+// set dialog body HTML
 document.getElementById('example').innerHTML = 'Hello World!';
+
+// get dialog body HTML
+var dialogBody = document.getElementById('example').innerHTML;
 ```
 
 ## Contribute
