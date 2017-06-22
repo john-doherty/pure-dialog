@@ -34,9 +34,9 @@ And does not require any JavaScript library or framework.
 
 ## How to use
 
-Add  [dist/pure-dialog.min.js](dist/pure-dialog.min.js) and [dist/pure-dialog.min.css](dist/pure-dialog.min.css) files.
+Add  [dist/pure-dialog.min.js](dist/pure-dialog.min.js) and [dist/pure-dialog.min.css](dist/pure-dialog.min.css) files to your page.
 
-_If your browser does not support Web Components you will need to ad the  [document.registerElement](polyfills/document-register-element.js) polyfill_
+_If your browser does not support Web Components you will need to ad the  [document.registerElement](polyfills/document-register-element.js) polyfill._
 
 ### In HTML
 
