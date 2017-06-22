@@ -2,7 +2,7 @@
 
 [![Shippable branch](https://img.shields.io/shippable/594ab4e4febbde0700daa804/master.svg)](https://app.shippable.com/projects/594ab4e4febbde0700daa804) [![Linked In](https://img.shields.io/badge/Linked-In-blue.svg)](https://www.linkedin.com/in/john-i-doherty) [![Twitter Follow](https://img.shields.io/twitter/follow/CambridgeMVP.svg?style=social&label=Twitter&style=plastic)](https://twitter.com/CambridgeMVP)
 
-Create dialogs with minimal effort using a new `pure-dialog` HTML tag. For example:
+Pure JavaScript Web Component that makes creating dialogs super simple. For example:
 
 ```html
 <pure-dialog id="example" title="Pure Dialog Demo" buttons="Absolutely, No">
@@ -10,11 +10,9 @@ Is this project worth a star?
 </pure-dialog>
 ```
 
-Becomes:
+Becomes
 
 ![Screenshot](/docs/screenshot.png)
-
-And does not require any JavaScript library or framework.
 
 **Table of Contents**
 
