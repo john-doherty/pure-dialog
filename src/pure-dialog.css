@@ -8,20 +8,24 @@
 pure-dialog {
     z-index: 999;
     visibility: hidden;
+    transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    opacity: 0;
 }
 
 pure-dialog[open] {
     visibility: visible;
+    opacity: 1;
 }
 
 pure-dialog[open][modal] {
-    position: absolute; /*fixed;*/
+    position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgba(50, 50, 50, 1);
+    background: rgba(50, 50, 50, 0.6);
     visibility: visible;
+    opacity: 1;
 }
 
 pure-dialog .pure-dialog-close {
@@ -54,6 +58,7 @@ pure-dialog .pure-dialog-title {
     line-height: 20px;
     padding: 20px;
     font-weight: bold;
+    user-select: none;
 }
 
 pure-dialog .pure-dialog-body {
