@@ -279,8 +279,8 @@ Tests are written using [jsdom](https://github.com/tmpvar/jsdom)/[jasmine](https
 | Filename                        | Description
 | ------------------------------- | ---------------------------------------------------------------------------------------
 | `pure-dialog-interface-spec.js` | Tests that check the correct properties, methods and defaults are exposed
-| `pure-dialog-event-spec.js`     | Test pure-dialog events fire in the correct order
 | `pure-dialog-method-spec.js`    | Tests that execute methods and verify their functionality by inspecting rendered output
+| `pure-dialog-rendering-spec.js` | Lists of test to check rendering
 
 ### Generate .min files
 

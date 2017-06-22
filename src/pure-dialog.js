@@ -214,13 +214,11 @@
      */
     function renderBody() {
 
-        var self = this;
-
         // create container
-        this._container = createEl(null, 'div', { 'class': 'pure-dialog-container' });
+        this._container = createEl(null, 'div', { class: 'pure-dialog-container' });
 
         // create a body element wrapper
-        this._body = createEl(this._container, 'div', { 'class': 'pure-dialog-body' });
+        this._body = createEl(this._container, 'div', { class: 'pure-dialog-body' });
 
         // copy all children written literally into the body of the <pure-dialog> HTML tag
         while (this.hasChildNodes()) {
@@ -239,8 +237,16 @@
     function renderTitle() {
 
         if (this.title !== '') {
-            var titleEl = createEl(null, 'div', { class: 'pure-dialog-title' }, this.title);
-            this._container.insertBefore(titleEl, this._body);
+
+            // either get existing title tag or create a new one
+            var el = this.querySelector('.pure-dialog-title') || createEl(null, 'div', { class: 'pure-dialog-title' });
+
+            el.textContent = this.title;
+
+            // if its not in the DOM, append it in the correct location
+            if (!el.parentElement) {
+                this._container.insertBefore(el, this._body);
+            }
         }
         else {
             // remove close button
