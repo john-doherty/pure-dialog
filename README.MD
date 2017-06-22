@@ -18,7 +18,7 @@ Becomes
 
 * [How to use](#how-to-use)
   * [In HTML](#in-html)
-  * [In JavaScript](#or-javaScript)
+  * [In JavaScript](#in-javascript)
   * [Methods](#methods)
   * [Events](#events)
   * [Properties and attributes](#properties-and-attributes)
@@ -34,7 +34,7 @@ Becomes
 
 Add  [dist/pure-dialog.min.js](dist/pure-dialog.min.js) and [dist/pure-dialog.min.css](dist/pure-dialog.min.css) files to your page.
 
-_If your browser does not support Web Components you will need to ad the  [document.registerElement](polyfills/document-register-element.js) polyfill._
+_If your browser does not support Web Components you will need to add the  [document.registerElement](polyfills/document-register-element.js) polyfill._
 
 ### In HTML
 
@@ -44,7 +44,7 @@ Is this project worth a star?
 </pure-dialog>
 ```
 
-### Or JavaScript
+### In JavaScript
 
 ```js
 // create the element
@@ -121,54 +121,54 @@ document.addEventListener('pure-dialog-button-clicked', function(e) {
 ```js
 // detect closed clicked
 dialog.addEventListener('pure-dialog-close-clicked', function(e) {
-  console.log(e.target.id) // console log the ID of the dialog
-  // use e.preventDefault() to stop the dialog from closing
+  console.log(e.target.id) // log dialog id
+  // stop the dialog from closing by using e.preventDefault()
 });
 ```
 
 ```js
 // detect dialog is opening
 dialog.addEventListener('pure-dialog-opening', function(e) {
-  console.log(e.target.id) // console log the ID of the opening dialog
-  // use e.preventDefault() to stop the dialog from opening
+  console.log(e.target.id) // log dialog id
+  // stop the dialog from opening by using e.preventDefault()
 });
 ```
 
 ```js
 // detect dialog has opened
 dialog.addEventListener('pure-dialog-opened', function(e) {
-  console.log(e.target.id) // console log the ID of the opened dialog
+  console.log(e.target.id) // log dialog id
 });
 ```
 
 ```js
 // detect dialog is closing
 dialog.addEventListener('pure-dialog-closing', function(e) {
-  console.log(e.target.id) // console log the ID of the closing dialog
-  // use e.preventDefault() to stop the dialog from closing
+  console.log(e.target.id) // log dialog id
+  // stop the dialog from closing by using e.preventDefault()
 });
 ```
 
 ```js
 // detect dialog has closed
 dialog.addEventListener('pure-dialog-closed', function(e) {
-  console.log(e.target.id) // console log the ID of the closed dialog
+  console.log(e.target.id) // log dialog id
 });
 ```
 
 ```js
 // detect dialog is appending to DOM
 dialog.addEventListener('pure-dialog-appending', function(e) {
-  console.log(e.target.id) // console log the ID of the dialog about to be inserted
-  // use e.preventDefault() to stop the dialog from been inserted
+  console.log(e.target.id) // log dialog id
+  // stop the dialog from been inserted by using e.preventDefault()
 });
 ```
 
 ```js
 // detect dialog removed from DOM
 dialog.addEventListener('pure-dialog-removing', function(e) {
-  console.log(e.target.id) // console log the ID of the dialog about to be removed
-  // use e.preventDefault() to stop the dialog from been removed
+  console.log(e.target.id) // log dialog id
+  // stop the dialog from been removed by using e.preventDefault()
 });
 ```
 
