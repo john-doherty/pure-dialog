@@ -2,7 +2,19 @@
 
 [![Shippable branch](https://img.shields.io/shippable/594ab4e4febbde0700daa804/master.svg)](https://app.shippable.com/projects/594ab4e4febbde0700daa804) [![Linked In](https://img.shields.io/badge/Linked-In-blue.svg)](https://www.linkedin.com/in/john-i-doherty) [![Twitter Follow](https://img.shields.io/twitter/follow/CambridgeMVP.svg?style=social&label=Twitter&style=plastic)](https://twitter.com/CambridgeMVP)
 
-Create dialogs with minimal effort using a new `pure-dialog` HTML tag _(framework independent Web Component written in pure JavaScript and good old ES5)_.
+Create dialogs with minimal effort using a new `pure-dialog` HTML tag. For example:
+
+```html
+<pure-dialog id="example" title="Pure Dialog Demo" buttons="Absolutely, No">
+Is this project worth a star?
+</pure-dialog>
+```
+
+Becomes:
+
+![Screenshot](/docs/screenshot.png)
+
+And does not require any JavaScript library or framework.
 
 **Table of Contents**
 
@@ -22,7 +34,9 @@ Create dialogs with minimal effort using a new `pure-dialog` HTML tag _(framewor
 
 ## How to use
 
-Add the [document.registerElement](polyfills/document-register-element.js) polyfill to your project to add support for Web Components. Next add  [dist/pure-dialog.min.js](dist/pure-dialog.min.js) and [dist/pure-dialog.min.css](dist/pure-dialog.min.css) files.
+Add  [dist/pure-dialog.min.js](dist/pure-dialog.min.js) and [dist/pure-dialog.min.css](dist/pure-dialog.min.css) files.
+
+_If your browser does not support Web Components you will need to ad the  [document.registerElement](polyfills/document-register-element.js) polyfill_
 
 ### In HTML
 
