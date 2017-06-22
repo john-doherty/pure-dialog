@@ -10,6 +10,9 @@ pure-dialog {
     visibility: hidden;
     transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
     opacity: 0;
+    backface-visibility: hidden;
+    perspective: 1000;
+    transform: translateZ(0);
 }
 
 pure-dialog[open] {
