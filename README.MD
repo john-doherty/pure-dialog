@@ -172,12 +172,13 @@ dialog.addEventListener('pure-dialog-removing', function(e) {
 
 ### Properties and attributes
 
-Property                                        | Attribute      | Description                            | Type      | Default
------------------------------------------------ | -------------- | -------------------------------------- | --------- | --------
-[title](#getset-title)                          | `title`        | The dialog title                       | _string_  | _empty_
-[buttons](#getset-buttons)                      | `buttons`      | Comma separated list of button labels  | _string_  | _empty_
-[closeButton](#get/set-close-button-visibility) | `close-button` | If true, renders a close button        | _boolean_ | `false`
-[innerHTML](#getset-dialog-body-html)           | -              | Injects HTML into body of dialog       | _string_  | _empty_
+Property                                        | Attribute         | Description                              | Type      | Default
+----------------------------------------------- | ----------------- | ---------------------------------------- | --------- | --------
+[title](#getset-title)                          | `title`           | The dialog title                         | _string_  | _empty_
+[buttons](#getset-buttons)                      | `buttons`         | Comma separated list of button labels    | _string_  | _empty_
+[closeButton](#get/set-close-button-visibility) | `close-button`    | If true, renders a close button          | _boolean_ | `false`
+[removeOnClose](#remove-on-close)               | `remove-on-close` | If true, remove dialog from DOM on close | _boolean_ | `false`
+[innerHTML](#getset-dialog-body-html)           | -                 | Injects HTML into body of dialog         | _string_  | _empty_
 
 #### Get/set title
 
@@ -207,6 +208,13 @@ document.getElementById('example').closeButton = true;
 
 // get close button visibility
 var closeButtonStatus = document.getElementById('example').closeButton;
+```
+
+#### Remove on close
+
+```js
+// ask the dialog to remove itself from the DOM when closed
+document.getElementById('example').removeOnClose = true;
 ```
 
 #### Get/set dialog body HTML

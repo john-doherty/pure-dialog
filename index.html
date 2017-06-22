@@ -50,6 +50,7 @@
                 var dialog = document.createElement('pure-dialog');
                 dialog.title = "Created via JS";
                 dialog.buttons = 'Okay';
+                dialog.removeOnClose = true;
 
                 dialog.addEventListener('pure-dialog-button-clicked', function(e) {
                     alert(e.detail + ' clicked!');

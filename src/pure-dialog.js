@@ -58,6 +58,16 @@
                     this._body.innerHTML = value;
                 }
             }
+        },
+
+        /** @property {string} pure-dialog.removeOnClose - removes the dialog from the dom on close */
+        removeOnClose: {
+            get: function () {
+                return (this.getAttribute('remove-on-close') === 'true');
+            },
+            set: function (value) {
+                this.setAttribute('remove-on-close', value === true);
+            }
         }
     });
 
@@ -152,6 +162,10 @@
             this.removeAttribute('open');
             this.removeAttribute('modal');
             this.dispatchEvent(new CustomEvent('pure-dialog-closed', { bubbles: true, cancelable: true }));
+
+            if (this.removeOnClose) {
+                this.remove();
+            }
         }
     };
 
