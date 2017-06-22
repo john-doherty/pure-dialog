@@ -66,29 +66,31 @@ dialog.showModal();
 
 ### Methods
 
+Assuming `var dialog = document.getElementById('example')`:
+
 ```js
 // show the dialog
-document.getElementById('example').show();
+dialog.show();
 ```
 
 ```js
 // show the dialog as a modal
-document.getElementById('example').showModal();
+dialog.showModal();
 ```
 
 ```js
 // close the dialog
-document.getElementById('example').close();
+dialog.close();
 ```
 
 ```js
 // add the dialog to the DOM (not require if using HTML literal)
-document.getElementById('example').appendToDOM();
+dialog.appendToDOM();
 ```
 
 ```js
 // remove the dialog from the DOM
-document.getElementById('example').remove();
+dialog.remove();
 ```
 
 ### Events
