@@ -174,59 +174,44 @@ dialog.addEventListener('pure-dialog-removing', function(e) {
 
 ### Properties and attributes
 
-Property                                        | Attribute         | Description                              | Type      | Default
------------------------------------------------ | ----------------- | ---------------------------------------- | --------- | --------
-[title](#getset-title)                          | `title`           | The dialog title                         | _string_  | _empty_
-[buttons](#getset-buttons)                      | `buttons`         | Comma separated list of button labels    | _string_  | _empty_
-[closeButton](#get/set-close-button-visibility) | `close-button`    | If true, renders a close button          | _boolean_ | `false`
-[removeOnClose](#remove-on-close)               | `remove-on-close` | If true, remove dialog from DOM on close | _boolean_ | `false`
-[innerHTML](#getset-dialog-body-html)           | -                 | Injects HTML into body of dialog         | _string_  | _empty_
+Property                                          | Attribute         | Description                              | Type      | Default
+------------------------------------------------- | ----------------- | ---------------------------------------- | --------- | --------
+[title](#set-title)                               | `title`           | Get/set the dialog title                 | _string_  | _empty_
+[buttons](#set-buttons)                           | `buttons`         | Get/set comma separated list of buttons  | _string_  | _empty_
+[closeButton](#set-close-button-visibility)       | `close-button`    | If true, renders a close button          | _boolean_ | `false`
+[removeOnClose](#remove-dialog-from-dom-on-close) | `remove-on-close` | If true, remove dialog from DOM on close | _boolean_ | `false`
+[innerHTML](#set-dialog-body-html)                | -                 | Injects HTML into body of dialog         | _string_  | _empty_
 
-#### Get/set title
+Assuming `var dialog = document.getElementById('example')`:
+
+#### Set title
 
 ```js
-// set dialog title
-document.getElementById('example').title = 'Pure Dialog Demo';
-
-// get dialog title
-var dialogTitle = document.getElementById('example').title;
+dialog.title = 'Pure Dialog Demo';
 ```
 
-#### Get/set buttons
+#### Set buttons
 
 ```js
-// set dialog buttons
-document.getElementById('example').buttons = 'Absolutely, No';
-
-// get dialog buttons
-var dialogButtons = document.getElementById('example').buttons;
+dialog.buttons = 'Absolutely, No';
 ```
 
-#### Get/set close button visibility
+#### Set close button visibility
 
 ```js
-// set close button visibility
-document.getElementById('example').closeButton = true;
-
-// get close button visibility
-var closeButtonStatus = document.getElementById('example').closeButton;
+dialog.closeButton = true;
 ```
 
-#### Remove on close
+#### Remove dialog from DOM on close
 
 ```js
-// ask the dialog to remove itself from the DOM when closed
-document.getElementById('example').removeOnClose = true;
+dialog.removeOnClose = true;
 ```
 
-#### Get/set dialog body HTML
+#### Set dialog body HTML
 
 ```js
-// set dialog body HTML
-document.getElementById('example').innerHTML = 'Hello World!';
-
-// get dialog body HTML
-var dialogBody = document.getElementById('example').innerHTML;
+dialog.innerHTML = 'Hello World!';
 ```
 
 ## Styling
