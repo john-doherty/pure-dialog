@@ -87,6 +87,14 @@
         attributes.forEach(function(item) {
             self.attributeChangedCallback(item.name, null, item.value);
         });
+
+        // if remove on close is set, remove it
+        self.addEventListener('pure-dialog-closed', function(e) {
+
+            if (e.target.removeOnClose) {
+                e.target.remove();
+            }
+        });
     };
 
     /**
@@ -156,15 +164,24 @@
      */
     pureDialog.close = function() {
 
+        var self = this;
         var allow = this.dispatchEvent(new CustomEvent('pure-dialog-closing', { bubbles: true, cancelable: true }));
 
         if (allow) {
             this.removeAttribute('open');
             this.removeAttribute('modal');
-            this.dispatchEvent(new CustomEvent('pure-dialog-closed', { bubbles: true, cancelable: true }));
 
-            if (this.removeOnClose) {
-                this.remove();
+            var transitionEndEventName = getTransitionEndEventName();
+
+            if (transitionEndEventName !== '') {
+
+                // browser support animation, therefore wait for it to end
+                this.addEventListener(transitionEndEventName, function() {
+                    self.dispatchEvent(new CustomEvent('pure-dialog-closed', { bubbles: true, cancelable: true }));
+                }, false);
+            }
+            else {
+                self.dispatchEvent(new CustomEvent('pure-dialog-closed', { bubbles: true, cancelable: true }));
             }
         }
     };
@@ -444,6 +461,30 @@
         }
 
         return parent;
+    }
+
+    /**
+     * Works out the name for the 'transitionend' for current browser
+     * @returns {string} transition end event name
+     */
+    function getTransitionEndEventName() {
+
+        var el = document.createElement('div');
+
+        var transitions = {
+            'transition': 'transitionend',
+            'OTransition': 'otransitionend',  // oTransitionEnd in very old Opera
+            'MozTransition': 'transitionend',
+            'WebkitTransition': 'webkitTransitionEnd'
+        };
+
+        for (var i in transitions) {
+            if (transitions.hasOwnProperty(i) && el.style[i] !== undefined) {
+                return transitions[i];
+            }
+        }
+
+        return '';
     }
 
     // patch CustomEvent to allow constructor creation (IE/Chrome) - resolved once initCustomEvent no longer exists
