@@ -182,6 +182,9 @@
 
             if (allow && !this.parentElement) {
                 document.body.appendChild(this);
+
+                // trigger element reflow after insert (we do this to ensure open is seen as a new css change)
+                var reflow = this.offsetWidth;
             }
         }
         else {

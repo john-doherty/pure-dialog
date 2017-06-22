@@ -48,6 +48,7 @@
             function createDialogViaJs() {
 
                 var dialog = document.createElement('pure-dialog');
+
                 dialog.title = "Created via JS";
                 dialog.buttons = 'Okay';
                 dialog.removeOnClose = true;
@@ -57,8 +58,8 @@
                 });
                 
                 dialog.appendToDOM();
-
-                dialog.show();
+dialog.showModal()
+                // setTimeout(function() {dialog.showModal()}, 10);
             }
         </script>
     </head>
