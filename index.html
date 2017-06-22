@@ -42,10 +42,22 @@
                 padding: 10px 20px;
                 font-size: 14px;
                 border-radius: 3px;
-                /*-webkit-appearance: none;*/
-                /*border: 1px solid #ccc;
-                background: #f8f8f8;*/
             }
+        </style>
+        <style>
+            /* make dialogs look like iOS */
+            pure-dialog .pure-dialog-container { border-radius: 10px; min-width: 260px; }
+            pure-dialog .pure-dialog-title { padding: 20px 20px 4px 20px; text-align: center; }
+            pure-dialog .pure-dialog-body { text-align: center; }
+            pure-dialog .pure-dialog-button {
+                background: transparent;
+                color: #157AFB;
+                border-top: 1px solid #ccc;
+                border-radius: 0;
+                margin: 0;
+                padding: 12px;
+            }
+            pure-dialog .pure-dialog-button:first-child { border-right: 1px solid #ccc; }
         </style>
         <script>
             function createDialogViaJs() {
