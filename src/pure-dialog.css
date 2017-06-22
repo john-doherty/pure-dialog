@@ -47,7 +47,8 @@ pure-dialog .pure-dialog-container {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 3px;
+    border-radius: 10px; 
+    min-width: 260px;
     overflow: hidden;
     padding-bottom: 40px;
     box-shadow: 0 1px 6px rgba(0,0,0,.06),0 2px 32px rgba(0,0,0,.16)!important;
@@ -56,7 +57,8 @@ pure-dialog .pure-dialog-container {
 pure-dialog .pure-dialog-title {
     font-size: 16px;
     line-height: 20px;
-    padding: 20px;
+    padding: 20px 20px 4px 20px;
+    text-align: center; 
     font-weight: bold;
     user-select: none;
 }
@@ -65,6 +67,7 @@ pure-dialog .pure-dialog-body {
     padding: 0 20px 20px 20px;
     font-size: 16px;
     color: #333;
+    text-align: center;
 }
 
 pure-dialog .pure-dialog-buttons {
@@ -78,14 +81,20 @@ pure-dialog .pure-dialog-buttons {
 
 pure-dialog .pure-dialog-button {
     border: 0;
-    color: #333;
     outline: 0;
     font-size: 14px;
-    padding: 10px;
     display: inline-block;
     width: 100%;
     cursor: pointer;
-    margin: 4px;
     -webkit-appearance: none;
-    border-radius: 4px;
+    border-radius: 0;
+    background: transparent;
+    color: #157AFB;
+    border-top: 1px solid #ccc;
+    margin: 0;
+    padding: 12px;
+}
+
+pure-dialog .pure-dialog-button:first-child { 
+    border-right: 1px solid #ccc; 
 }
