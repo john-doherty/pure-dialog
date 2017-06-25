@@ -95,7 +95,7 @@ dialog.remove();
 
 ### Events
 
-All pure-dialog events bubble up so it is possible to listen for a pure-dialog events at the root of the DOM.
+All pure-dialog events bubble up so it is possible to listen for pure-dialog events at the root of the DOM.
 
 Assuming `var dialog = document.getElementById('example')`:
 
@@ -122,6 +122,7 @@ document.addEventListener('pure-dialog-button-clicked', function(e) {
 // detect closed clicked
 dialog.addEventListener('pure-dialog-close-clicked', function(e) {
   console.log(e.target.id) // log dialog id
+
   // stop the dialog from closing by using e.preventDefault()
 });
 ```
@@ -130,6 +131,7 @@ dialog.addEventListener('pure-dialog-close-clicked', function(e) {
 // detect dialog is opening
 dialog.addEventListener('pure-dialog-opening', function(e) {
   console.log(e.target.id) // log dialog id
+
   // stop the dialog from opening by using e.preventDefault()
 });
 ```
@@ -145,6 +147,7 @@ dialog.addEventListener('pure-dialog-opened', function(e) {
 // detect dialog is closing
 dialog.addEventListener('pure-dialog-closing', function(e) {
   console.log(e.target.id) // log dialog id
+
   // stop the dialog from closing by using e.preventDefault()
 });
 ```
@@ -160,6 +163,7 @@ dialog.addEventListener('pure-dialog-closed', function(e) {
 // detect dialog is appending to DOM
 dialog.addEventListener('pure-dialog-appending', function(e) {
   console.log(e.target.id) // log dialog id
+
   // stop the dialog from been inserted by using e.preventDefault()
 });
 ```
@@ -168,6 +172,7 @@ dialog.addEventListener('pure-dialog-appending', function(e) {
 // detect dialog removed from DOM
 dialog.addEventListener('pure-dialog-removing', function(e) {
   console.log(e.target.id) // log dialog id
+
   // stop the dialog from been removed by using e.preventDefault()
 });
 ```
@@ -211,7 +216,7 @@ dialog.innerHTML = 'Hello World!';
 
 ## Styling
 
-pure-dialog is designed to be super light and only produces the following output, making it easy to style:
+pure-dialog was designed to be super light and therefore only produces the following output, making it easy to style:
 
 ```html
 <pure-dialog id="example" title="Pure Dialog Demo" buttons="Yes, No">
@@ -219,14 +224,14 @@ pure-dialog is designed to be super light and only produces the following output
     <div class="pure-dialog-title">Pure Dialog Demo</div>
     <div class="pure-dialog-body">Is this project worth a star?</div>
     <div class="pure-dialog-buttons">
-      <input type="button" value="Absolutely" class="pure-dialog-button">
-      <input type="button" value="No" class="pure-dialog-button">
+      <input class="pure-dialog-button" type="button" value="Absolutely">
+      <input class="pure-dialog-button" type="button" value="No">
     </div>
   </div>
 </pure-dialog>
 ```
 
-To change the colour of a particular button, use its value as a selector:
+To change the colour of a particular button, you could use its value as a selector:
 
 ```css
 #example input[value="Absolutely"] { background: #880000; }
@@ -276,7 +281,7 @@ The version number is picked up from the `package.json` file.
 
 ## Reporting bugs
 
-If you find a bug, please create an [issue](https://github.com/john-doherty/pure-dialog/issues) _(include a [jsfiddle](https://jsfiddle.net) if possible)_.
+If you find a bug, please create an [issue](https://github.com/john-doherty/pure-dialog/issues) and include a [jsfiddle](https://jsfiddle.net) or [CodePen](https://codepen.io/anon/pen/bRrbMe) if possible.
 
 ## Pull requests
 
