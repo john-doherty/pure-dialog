@@ -219,7 +219,7 @@ dialog.innerHTML = 'Hello World!';
 pure-dialog was designed to be super light and therefore only produces the following output, making it easy to style:
 
 ```html
-<pure-dialog id="example" title="Pure Dialog Demo" buttons="Yes, No">
+<pure-dialog id="example" title="Pure Dialog Demo" buttons="Absolutely, No">
   <div class="pure-dialog-container">
     <div class="pure-dialog-title">Pure Dialog Demo</div>
     <div class="pure-dialog-body">Is this project worth a star?</div>
