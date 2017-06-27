@@ -10,11 +10,11 @@ Is this project worth a star?
 </pure-dialog>
 ```
 
-Becomes
+Becomes:
 
 ![Screenshot](/docs/screenshot.png)
 
-_Try the [interactive example](https://codepen.io/anon/pen/bRrbMe)
+Try the [interactive example](https://codepen.io/anon/pen/bRrbMe)
 
 **Table of Contents**
 
