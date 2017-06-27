@@ -14,6 +14,8 @@ Becomes
 
 ![Screenshot](/docs/screenshot.png)
 
+_Try the [interactive example](https://codepen.io/anon/pen/bRrbMe)
+
 **Table of Contents**
 
 * [How to use](#how-to-use)
