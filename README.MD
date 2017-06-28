@@ -16,7 +16,7 @@ Becomes:
 
 ![Screenshot](/docs/screenshot.png)
 
-Try the [interactive example](https://codepen.io/anon/pen/bRrbMe)
+Try the [demo](https://codepen.io/anon/pen/bRrbMe)
 
 **Table of Contents**
 
