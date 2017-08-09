@@ -2,9 +2,7 @@
 
 [![Shippable branch](https://img.shields.io/shippable/594ab4e4febbde0700daa804/master.svg)](https://app.shippable.com/projects/594ab4e4febbde0700daa804) [![Linked In](https://img.shields.io/badge/Linked-In-blue.svg)](https://www.linkedin.com/in/john-i-doherty) [![Twitter Follow](https://img.shields.io/twitter/follow/CambridgeMVP.svg?style=social&label=Twitter&style=plastic)](https://twitter.com/CambridgeMVP)
 
-Dialog Web Component written in pure JavaScript that simplifies the creation of dialogs in Web and Hybrid Mobile apps.
-
-For example:
+A dialog Web Component written in pure JavaScript that aims to simplify the creation of dialogs in Web and Hybrid Mobile apps. For example:
 
 ```html
 <pure-dialog id="example" title="Pure Dialog Demo" buttons="Absolutely, No">
