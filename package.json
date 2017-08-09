@@ -1,7 +1,7 @@
 {
   "name": "pure-dialog",
-  "version": "1.1.0",
-  "description": "Dialog Web Component written in pure JavaScript that simplifies the creation of dialogs in Web and Hybrid Mobile apps.",
+  "version": "1.1.1",
+  "description": "HTML dialog web component written in pure JavaScript to simplify the creation of dialogs in Web and Hybrid Mobile apps.",
   "main": "dev-server.js",
   "scripts": {
     "start": "node server/dev-server.js",

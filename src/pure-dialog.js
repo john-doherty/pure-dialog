@@ -1,6 +1,6 @@
 /*!
  * pure-dialog - v@version@
- * Pure JavaScript HTML dialog as a Web Component
+ * HTML dialog web component written in pure JavaScript
  * https://github.com/john-doherty/pure-dialog
  * @author John Doherty <www.johndoherty.info>
  * @license MIT
@@ -14,6 +14,12 @@
      * @description A custom HTML element (Web Component) that can be created using
      * document.createElement('pure-dialog') or included in a HTML page as an element.
      */
+
+    // check if we're using a touch screen
+    var isTouch = (('ontouchstart' in window) || (navigator.MaxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
+
+    // switch to touch events if using a touch screen
+    var mouseClick = isTouch ? 'touchend' : 'click';
 
     // Create a prototype for our new element that extends HTMLElement
     var pureDialog = Object.create(base, {
@@ -301,7 +307,7 @@
             });
 
             // listen for button click events
-            buttonContainer.onclick = function(e) {
+            buttonContainer.addEventListener(mouseClick, function(e) {
 
                 var el = e.target;
 
@@ -313,7 +319,7 @@
                         self.close();
                     }
                 }
-            };
+            });
         }
         else {
             // remove close button
@@ -333,10 +339,10 @@
         if (this.closeButton) {
 
             // add close button
-            var closeButton = createEl(this._container, 'div', { 'class': 'pure-dialog-close' });
+            var closeButton = createEl(this._container, 'div', { class: 'pure-dialog-close' });
 
             // add close event
-            closeButton.onclick = function(e) {
+            closeButton.addEventListener(mouseClick, function(e) {
                 e.preventDefault();
 
                 var allow = this.dispatchEvent(new CustomEvent('pure-dialog-close-clicked', { bubbles: true, cancelable: true }));
@@ -344,7 +350,7 @@
                 if (allow) {
                     self.close();
                 }
-            };
+            });
         }
         else {
             // remove close button
