@@ -294,31 +294,41 @@
 
         if (buttons.length > 0) {
 
-            // insert button container if it does not already exist
-            var buttonContainer = this._container.querySelector('.pure-dialog-buttons') || createEl(this._container, 'div', { 'class': 'pure-dialog-buttons' });
+            // get the current button container if it exists
+            var buttonContainer = this._container.querySelector('.pure-dialog-buttons');
 
-            // ensure it's empty (this could be a re-render)
-            buttonContainer.innerHTML = '';
+            // if we already have a button container in the DOM
+            if (buttonContainer) {
+
+                // ensure it's empty (this could be a re-render)
+                buttonContainer.innerHTML = '';
+            }
+            // otherwise, create one and bind events (one time)
+            else {
+
+                // create & insert container
+                buttonContainer = createEl(this._container, 'div', { 'class': 'pure-dialog-buttons' });
+
+                // listen for button click events
+                buttonContainer.addEventListener(mouseClick, function(e) {
+
+                    var el = e.target;
+
+                    if (el.tagName === 'INPUT' && el.className.indexOf('pure-dialog-button') > -1) {
+
+                        var proceedToClose = self.dispatchEvent(new CustomEvent('pure-dialog-button-clicked', { detail: el.value, bubbles: true, cancelable: true }));
+
+                        if (proceedToClose) {
+                            self.close();
+                        }
+                    }
+                });
+            }
 
             // insert buttons
             buttons.forEach(function(item) {
                 // insert button
                 createEl(buttonContainer, 'input', { type: 'button', value: item.trim(), class: 'pure-dialog-button' });
-            });
-
-            // listen for button click events
-            buttonContainer.addEventListener(mouseClick, function(e) {
-
-                var el = e.target;
-
-                if (el.tagName === 'INPUT' && el.className.indexOf('pure-dialog-button') > -1) {
-
-                    var proceedToClose = self.dispatchEvent(new CustomEvent('pure-dialog-button-clicked', { detail: el.value, bubbles: true, cancelable: true }));
-
-                    if (proceedToClose) {
-                        self.close();
-                    }
-                }
             });
         }
         else {
