@@ -40,7 +40,13 @@
                 return this.getAttribute('buttons') || '';
             },
             set: function (value) {
-                this.setAttribute('buttons', value);
+
+                // remove duplicates
+                var uniqueValue = (value || '').split(',').filter(function(item, index, all) {
+                    return (index === all.indexOf(item));
+                });
+
+                this.setAttribute('buttons', uniqueValue);
             }
         },
 
