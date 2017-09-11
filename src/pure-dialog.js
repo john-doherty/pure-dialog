@@ -63,12 +63,19 @@
         /** @property {string} pure-dialog.innerHTML - set the dialog body HTML */
         innerHTML: {
             get: function () {
-                return (this._body) ? this._body.innerHTML : '';
+                return (this.body) ? this.body.innerHTML : '';
             },
             set: function (value) {
-                if (this._body) {
-                    this._body.innerHTML = value;
+                if (this.body) {
+                    this.body.innerHTML = value;
                 }
+            }
+        },
+
+        /** @property {string} pure-dialog.body - dialog inner body tag */
+        body: {
+            get: function () {
+                return this._body;
             }
         },
 

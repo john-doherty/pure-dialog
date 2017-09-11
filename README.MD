@@ -187,7 +187,8 @@ title          | `title`           | Get/set the dialog title                 | 
 buttons        | `buttons`         | Get/set comma separated list of buttons  | _string_  | _empty_
 closeButton    | `close-button`    | If true, renders a close button          | _boolean_ | `false`
 removeOnClose  | `remove-on-close` | If true, remove dialog from DOM on close | _boolean_ | `false`
-innerHTML      | -                 | Injects HTML into body of dialog         | _string_  | _empty_
+innerHTML      | _n/a_             | Injects HTML into body of dialog         | _string_  | _empty_
+body           | _n/a_             | Gets dialog inner body tag               | _object_  | null
 
 Assuming `var dialog = document.getElementById('example')`:
 
@@ -214,6 +215,11 @@ dialog.removeOnClose = true;
 ```js
 // set dialog body HTML
 dialog.innerHTML = 'Hello World!';
+```
+
+```js
+// set inner text via body tag
+dialog.body.textContent = 'Hello World';
 ```
 
 ## Styling

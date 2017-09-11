@@ -63,6 +63,7 @@ describe('pure-dialog interface', function () {
         expect(typeof el.buttons).toEqual('string');
         expect(typeof el.closeButton).toEqual('boolean');
         expect(typeof el.removeOnClose).toEqual('boolean');
+        expect(typeof el.body).toEqual('object');
     });
 
     it('should expose properties with correct defaults', function() {
@@ -71,6 +72,7 @@ describe('pure-dialog interface', function () {
 
         expect(el.title).toEqual('');
         expect(el.innerHTML).toEqual('');
+        expect(el.body).not.toBe(null);
         expect(el.buttons).toEqual('');
         expect(el.closeButton).toEqual(false);
         expect(el.removeOnClose).toEqual(false);
