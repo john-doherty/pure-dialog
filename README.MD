@@ -1,6 +1,11 @@
 # pure-dialog
 
-[![Shippable branch](https://img.shields.io/shippable/594ab4e4febbde0700daa804/master.svg)](https://app.shippable.com/projects/594ab4e4febbde0700daa804) [![Linked In](https://img.shields.io/badge/Linked-In-blue.svg)](https://www.linkedin.com/in/john-i-doherty) [![Twitter Follow](https://img.shields.io/twitter/follow/CambridgeMVP.svg?style=social&label=Twitter&style=plastic)](https://twitter.com/CambridgeMVP)
+[![Shippable branch](https://img.shields.io/shippable/594ab4e4febbde0700daa804/master.svg)](https://app.shippable.com/projects/594ab4e4febbde0700daa804)
+[![Linked In](https://img.shields.io/badge/Linked-In-blue.svg)](https://www.linkedin.com/in/john-i-doherty)
+[![Twitter Follow][twitter-image]][twitter-url]
+
+[twitter-image]:https://img.shields.io/twitter/follow/CambridgeMVP.svg?style=social&label=Follow%20me
+[twitter-url]:https://twitter.com/CambridgeMVP
 
 HTML dialog web component written in pure JavaScript to simplify the creation of dialogs in Web and Hybrid Mobile apps. For example:
 
@@ -16,21 +21,27 @@ Becomes:
 
 Try the [demo](https://codepen.io/anon/pen/bRrbMe)
 
-**Table of Contents**
-
-* [How to use](#how-to-use)
-  * [In HTML](#in-html)
-  * [In JavaScript](#in-javascript)
-  * [Methods](#methods)
-  * [Events](#events)
-  * [Properties and attributes](#properties-and-attributes)
-  * [Styling](#styling)
-* [Contribute](#contribute)
-  * [Local development](#local-development)
-  * [Testing](#testing)
-  * [Generate .min files](#generate-min-files)
-* [Reporting bugs](#reporting-bugs)
-* [Pull requests](#pull-requests)
+<details>
+  <summary>Table of Contents</summary>
+  <ul>
+    <li><a href="#how-to-use">How to use</a></li>
+    <ul>
+      <li><a href="#in-html">In HTML</a></li>
+      <li><a href="#in-javascript">In JavaScript</a></li>
+      <li><a href="#methods">Methods</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#properties-and-attributes">Properties and attributes</a></li>
+      <li><a href="#styling">Styling</a></li>
+    </ul>
+    <li><a href="#contribute">Contribute</a></li>
+    <ul>
+      <li><a href="#local-development">Local development</a></li>
+      <li><a href="#testing">Testing</a></li>
+      <li><a href="#update-min-files">Update .min files</a></li>
+    </ul>
+    <li><a href="#reporting-bugs">Reporting bugs</a></li>
+    <li><a href="#pull-requests">Pull requests</a></li>
+</details>
 
 ## How to use
 
@@ -71,35 +82,16 @@ dialog.showModal();
 Assuming `var dialog = document.getElementById('example')`:
 
 ```js
-// show the dialog
-dialog.show();
-```
-
-```js
-// show the dialog as a modal
-dialog.showModal();
-```
-
-```js
-// close the dialog
-dialog.close();
-```
-
-```js
-// add the dialog to the DOM (not require if using HTML literal)
-dialog.appendToDOM();
-```
-
-```js
-// remove the dialog from the DOM
-dialog.remove();
+dialog.show(); // show the dialog
+dialog.showModal(); // show the dialog as a modal
+dialog.close(); // close the dialog
+dialog.appendToDOM(); // add the dialog to the DOM (not require if using HTML literal)
+dialog.remove(); // remove the dialog from the DOM
 ```
 
 ### Events
 
-All pure-dialog events bubble up so it is possible to listen for pure-dialog events at the root of the DOM.
-
-Assuming `var dialog = document.getElementById('example')`:
+All pure-dialog events bubble up so it is possible to listen for pure-dialog events at the root of the DOM. Assuming `var dialog = document.getElementById('example')`:
 
 ```js
 // detect button clicks on the #example element
@@ -114,63 +106,49 @@ dialog.addEventListener('pure-dialog-button-clicked', function(e) {
   }
 });
 
-// detect button click on all dialogs
+// detect button click on all dialogs in the DOM
 document.addEventListener('pure-dialog-button-clicked', function(e) {
   console.log(e.detail); // log button label
 });
-```
 
-```js
 // detect closed clicked
 dialog.addEventListener('pure-dialog-close-clicked', function(e) {
   console.log(e.target.id) // log dialog id
 
   // stop the dialog from closing by using e.preventDefault()
 });
-```
 
-```js
 // detect dialog is opening
 dialog.addEventListener('pure-dialog-opening', function(e) {
   console.log(e.target.id) // log dialog id
 
   // stop the dialog from opening by using e.preventDefault()
 });
-```
 
-```js
 // detect dialog has opened
 dialog.addEventListener('pure-dialog-opened', function(e) {
   console.log(e.target.id) // log dialog id
 });
-```
 
-```js
 // detect dialog is closing
 dialog.addEventListener('pure-dialog-closing', function(e) {
   console.log(e.target.id) // log dialog id
 
   // stop the dialog from closing by using e.preventDefault()
 });
-```
 
-```js
 // detect dialog has closed
 dialog.addEventListener('pure-dialog-closed', function(e) {
   console.log(e.target.id) // log dialog id
 });
-```
 
-```js
 // detect dialog is appending to DOM
 dialog.addEventListener('pure-dialog-appending', function(e) {
   console.log(e.target.id) // log dialog id
 
   // stop the dialog from been inserted by using e.preventDefault()
 });
-```
 
-```js
 // detect dialog removed from DOM
 dialog.addEventListener('pure-dialog-removing', function(e) {
   console.log(e.target.id) // log dialog id
@@ -193,33 +171,12 @@ body           | _n/a_             | Gets dialog inner body tag               | 
 Assuming `var dialog = document.getElementById('example')`:
 
 ```js
-// set title
-dialog.title = 'Pure Dialog Demo';
-```
-
-```js
-// set buttons
-dialog.buttons = 'Absolutely, No';
-```
-
-```js
-// set close button visibility
-dialog.closeButton = true;
-```
-
-```js
-// remove dialog from DOM on close
-dialog.removeOnClose = true;
-```
-
-```js
-// set dialog body HTML
-dialog.innerHTML = 'Hello World!';
-```
-
-```js
-// set inner text via body tag
-dialog.body.textContent = 'Hello World';
+dialog.title = 'Pure Dialog Demo'; // set title
+dialog.buttons = 'Absolutely, No'; // set buttons
+dialog.closeButton = true; // set close button visibility
+dialog.removeOnClose = true; // remove dialog from DOM on close
+dialog.innerHTML = 'Hello World!'; // set dialog body HTML
+dialog.body.textContent = 'Hello World'; // set inner text via body tag
 ```
 
 ## Styling
@@ -273,11 +230,11 @@ Tests are written using [jsdom](https://github.com/tmpvar/jsdom)/[jasmine](https
 
 | Filename                        | Description
 | ------------------------------- | ---------------------------------------------------------------------------------------
-| `pure-dialog-interface-spec.js` | Tests that check the correct properties, methods and defaults are exposed
-| `pure-dialog-method-spec.js`    | Tests that execute methods and verify their functionality by inspecting rendered output
-| `pure-dialog-rendering-spec.js` | Lists of test to check rendering
+| `pure-dialog-interface-spec.js` | Check properties, methods and defaults are exposed
+| `pure-dialog-method-spec.js`    | Executes methods and verifies functionality by inspecting output
+| `pure-dialog-rendering-spec.js` | Various rendering checks
 
-### Generate .min files
+### Update .min files
 
 The minified [pure-dialog.min.js](dist/pure-dialog.min.js) and [pure-dialog.min.css](dist/pure-dialog.min.css) files included in this project are the latest version. To generate new .min files, execute the following:
 
