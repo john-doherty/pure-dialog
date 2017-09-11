@@ -165,6 +165,7 @@ title          | `title`           | Get/set the dialog title                 | 
 buttons        | `buttons`         | Get/set comma separated list of buttons  | _string_  | _empty_
 closeButton    | `close-button`    | If true, renders a close button          | _boolean_ | `false`
 removeOnClose  | `remove-on-close` | If true, remove dialog from DOM on close | _boolean_ | `false`
+autoClose      | `auto-close`      | auto close when button clicked           | _boolean_ | `true`
 innerHTML      | _n/a_             | Injects HTML into body of dialog         | _string_  | _empty_
 body           | _n/a_             | Gets dialog inner body tag               | _object_  | null
 
@@ -175,6 +176,7 @@ dialog.title = 'Pure Dialog Demo'; // set title
 dialog.buttons = 'Absolutely, No'; // set buttons
 dialog.closeButton = true; // set close button visibility
 dialog.removeOnClose = true; // remove dialog from DOM on close
+dialog.autoClose = false; // do not auto close when button clicked
 dialog.innerHTML = 'Hello World!'; // set dialog body HTML
 dialog.body.textContent = 'Hello World'; // set inner text via body tag
 ```

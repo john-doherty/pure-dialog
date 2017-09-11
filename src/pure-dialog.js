@@ -60,6 +60,16 @@
             }
         },
 
+        /** @property {boolean} pure-dialog.autoClose - should the dialog auto close on button click */
+        autoClose: {
+            get: function () {
+                return (this.getAttribute('auto-close') === null || this.getAttribute('auto-close') === 'true');
+            },
+            set: function (value) {
+                this.setAttribute('auto-close', value === true);
+            }
+        },
+
         /** @property {string} pure-dialog.innerHTML - set the dialog body HTML */
         innerHTML: {
             get: function () {
@@ -331,7 +341,7 @@
 
                         var proceedToClose = self.dispatchEvent(new CustomEvent('pure-dialog-button-clicked', { detail: el.value, bubbles: true, cancelable: true }));
 
-                        if (proceedToClose) {
+                        if (self.autoClose && proceedToClose) {
                             self.close();
                         }
                     }
