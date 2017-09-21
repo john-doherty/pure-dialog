@@ -183,7 +183,7 @@ dialog.body.textContent = 'Hello World';  // set inner text via body tag
 
 ## Styling
 
-`pure-dialog` was designed to light so only produces the following output, making it easy to style:
+`pure-dialog` was designed to be light and so only produces the following output, making it easy to style:
 
 ```html
 <pure-dialog id="example" title="Pure Dialog Demo" buttons="Absolutely, No">
