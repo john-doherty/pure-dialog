@@ -12,7 +12,7 @@ pure-dialog {
     backface-visibility: hidden;
     perspective: 1000;
     transform: translateZ(0);
-    transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    /* transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out; */
     font-size: 14px;
     font-family: tahoma;
 }

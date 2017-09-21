@@ -120,6 +120,8 @@
         // if remove on close is set, remove it
         self.addEventListener('pure-dialog-closed', function(e) {
 
+            self.removeAttribute('closing');
+
             if (e.target.removeOnClose) {
                 e.target.remove();
             }
@@ -194,20 +196,29 @@
     pureDialog.close = function() {
 
         var self = this;
-        var allow = this.dispatchEvent(new CustomEvent('pure-dialog-closing', { bubbles: true, cancelable: true }));
+        var allow = self.dispatchEvent(new CustomEvent('pure-dialog-closing', { bubbles: true, cancelable: true }));
 
         if (allow) {
-            this.removeAttribute('open');
-            this.removeAttribute('modal');
 
-            var transitionEndEventName = getTransitionEndEventName();
+            self.removeAttribute('open');
+            self.removeAttribute('modal');
+            self.setAttribute('closing', 'true');
 
-            if (transitionEndEventName !== '') {
+            var bodyEl = self.querySelector('.pure-dialog-body');
 
-                // browser support animation, therefore wait for it to end
-                this.addEventListener(transitionEndEventName, function() {
-                    self.dispatchEvent(new CustomEvent('pure-dialog-closed', { bubbles: true, cancelable: true }));
-                }, false);
+            var hasAnimation = (self.style.animationName || self.style.transition || (bodyEl && bodyEl.style.animationName) || (bodyEl && bodyEl.style.transition));
+
+            if (hasAnimation) {
+
+                var transitionEndEventName = getTransitionEndEventName();
+
+                if (transitionEndEventName !== '') {
+
+                    // browser support animation, therefore wait for it to end
+                    self.addEventListener(transitionEndEventName, function() {
+                        self.dispatchEvent(new CustomEvent('pure-dialog-closed', { bubbles: true, cancelable: true }));
+                    }, false);
+                }
             }
             else {
                 self.dispatchEvent(new CustomEvent('pure-dialog-closed', { bubbles: true, cancelable: true }));

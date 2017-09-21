@@ -61,6 +61,67 @@
                 dialog.showModal();
             }
         </script>
+        <script>
+
+            // listen out for pure-dialog events on the DOM
+            window.onload = function () {
+
+                // listen for button clicks
+                document.addEventListener('pure-dialog-button-clicked', function(e) {
+                    console.log(e.type);    // event name
+                    console.log(e.target);  // pure-dialog HTML element
+                    console.log(e.detail);  // button clicked 
+                    // use e.preventDefault() to cancel event
+                });
+
+                // detect closed clicked
+                document.addEventListener('pure-dialog-close-clicked', function(e) {
+                    console.log(e.type);     // event name
+                    console.log(e.target);   // pure-dialog HTML element
+                    // stop the dialog from closing by using e.preventDefault()
+                });
+
+                // detect dialog is opening
+                document.addEventListener('pure-dialog-opening', function(e) {
+                    console.log(e.type);     // event name
+                    console.log(e.target);   // pure-dialog HTML element
+                    // stop the dialog from opening by using e.preventDefault()
+                });
+
+                // detect dialog has opened
+                document.addEventListener('pure-dialog-opened', function(e) {
+                    console.log(e.type);     // event name
+                    console.log(e.target);   // pure-dialog HTML element
+                });
+
+                // detect dialog is closing
+                document.addEventListener('pure-dialog-closing', function(e) {
+                    console.log(e.type);     // event name
+                    console.log(e.target);   // pure-dialog HTML element
+                    // stop the dialog from closing by using e.preventDefault()
+                });
+
+                // detect dialog has closed
+                document.addEventListener('pure-dialog-closed', function(e) {
+                    console.log(e.type);     // event name
+                    console.log(e.target);   // pure-dialog HTML element
+                });
+
+                // detect dialog is appending to DOM
+                document.addEventListener('pure-dialog-appending', function(e) {
+                    console.log(e.type);     // event name
+                    console.log(e.target);   // pure-dialog HTML element
+                    // stop the dialog from been inserted by using e.preventDefault()
+                });
+
+                // detect dialog removed from DOM
+                document.addEventListener('pure-dialog-removing', function(e) {
+                    console.log(e.type);     // event name
+                    console.log(e.target);   // pure-dialog HTML element
+                    // stop the dialog from been removed by using e.preventDefault()
+                });
+            };
+        </script>
     </head>
 
     <body>
