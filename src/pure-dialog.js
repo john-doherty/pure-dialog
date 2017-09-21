@@ -196,33 +196,17 @@
     pureDialog.close = function() {
 
         var self = this;
+        var transitionEndEventName = getTransitionEndEventName();
         var allow = self.dispatchEvent(new CustomEvent('pure-dialog-closing', { bubbles: true, cancelable: true }));
 
         if (allow) {
-
             self.removeAttribute('open');
             self.removeAttribute('modal');
             self.setAttribute('closing', 'true');
 
-            var bodyEl = self.querySelector('.pure-dialog-body');
-
-            var hasAnimation = (self.style.animationName || self.style.transition || (bodyEl && bodyEl.style.animationName) || (bodyEl && bodyEl.style.transition));
-
-            if (hasAnimation) {
-
-                var transitionEndEventName = getTransitionEndEventName();
-
-                if (transitionEndEventName !== '') {
-
-                    // browser support animation, therefore wait for it to end
-                    self.addEventListener(transitionEndEventName, function() {
-                        self.dispatchEvent(new CustomEvent('pure-dialog-closed', { bubbles: true, cancelable: true }));
-                    }, false);
-                }
-            }
-            else {
+            setTimeout(function() {
                 self.dispatchEvent(new CustomEvent('pure-dialog-closed', { bubbles: true, cancelable: true }));
-            }
+            }, 1000);
         }
     };
 
@@ -401,7 +385,6 @@
             removeElementBySelector(this, '.pure-dialog-close');
         }
     }
-
 
     /*------------------------*/
     /* PRIVATE HELPER METHODS */
