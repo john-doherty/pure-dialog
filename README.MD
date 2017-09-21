@@ -172,13 +172,13 @@ body           | _n/a_             | Gets dialog inner body tag               | 
 Assuming `var dialog = document.getElementById('example')`:
 
 ```js
-dialog.title = 'Pure Dialog Demo'; // set title
-dialog.buttons = 'Absolutely, No'; // set buttons
-dialog.closeButton = true; // set close button visibility
-dialog.removeOnClose = true; // remove dialog from DOM on close
-dialog.autoClose = false; // do not auto close when button clicked
-dialog.innerHTML = 'Hello World!'; // set dialog body HTML
-dialog.body.textContent = 'Hello World'; // set inner text via body tag
+dialog.title = 'Pure Dialog Demo';        // set title
+dialog.buttons = 'Absolutely, No';        // set buttons
+dialog.closeButton = true;                // set close button visibility
+dialog.removeOnClose = true;              // remove dialog from DOM on close
+dialog.autoClose = false;                 // do not auto close when button clicked
+dialog.innerHTML = 'Hello World!';        // set dialog body HTML
+dialog.body.textContent = 'Hello World';  // set inner text via body tag
 ```
 
 ## Styling
