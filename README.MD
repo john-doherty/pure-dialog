@@ -82,11 +82,11 @@ dialog.showModal();
 Assuming `var dialog = document.getElementById('example')`:
 
 ```js
-dialog.show(); // show the dialog
-dialog.showModal(); // show the dialog as a modal
-dialog.close(); // close the dialog
+dialog.show();        // show the dialog
+dialog.showModal();   // show the dialog as a modal
+dialog.close();       // close the dialog
 dialog.appendToDOM(); // add the dialog to the DOM (not require if using HTML literal)
-dialog.remove(); // remove the dialog from the DOM
+dialog.remove();      // remove the dialog from the DOM
 ```
 
 ### Events
@@ -183,7 +183,7 @@ dialog.body.textContent = 'Hello World'; // set inner text via body tag
 
 ## Styling
 
-pure-dialog was designed to be super light and therefore only produces the following output, making it easy to style:
+`pure-dialog` was designed to light so only produces the following output, making it easy to style:
 
 ```html
 <pure-dialog id="example" title="Pure Dialog Demo" buttons="Absolutely, No">
@@ -198,7 +198,7 @@ pure-dialog was designed to be super light and therefore only produces the follo
 </pure-dialog>
 ```
 
-To change the colour of a particular button, you could use its value as a selector:
+To change the style of a particular button, you could use its value as a selector:
 
 ```css
 #example input[value="Absolutely"] { background: #880000; }
