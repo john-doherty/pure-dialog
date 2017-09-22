@@ -197,6 +197,7 @@
 
         var self = this;
         var transitionEndEventName = getTransitionEndEventName();
+        var animationEndEventName = getAnimationEndEventName();
         var allow = self.dispatchEvent(new CustomEvent('pure-dialog-closing', { bubbles: true, cancelable: true }));
 
         if (allow) {
@@ -204,9 +205,20 @@
             self.removeAttribute('modal');
             self.setAttribute('closing', 'true');
 
-            setTimeout(function() {
+            // wait for transition to end if we have one
+            self.addEventListener(transitionEndEventName, function(e) {
                 self.dispatchEvent(new CustomEvent('pure-dialog-closed', { bubbles: true, cancelable: true }));
-            }, 1000);
+            });
+
+            // wait for animation to end if we have one
+            self.addEventListener(animationEndEventName, function(e) {
+                self.dispatchEvent(new CustomEvent('pure-dialog-closed', { bubbles: true, cancelable: true }));
+            });
+
+            // if we dont have any animations/transitions - fire close event immediately
+            if (!hasCssAnimation(self)) {
+                self.dispatchEvent(new CustomEvent('pure-dialog-closed', { bubbles: true, cancelable: true }));
+            }
         }
     };
 
@@ -391,6 +403,36 @@
     /*------------------------*/
 
     /**
+     * Determine if an element of any or its children have a CSS animation applied
+     * @param {HTMLElement} el - element to inspect
+     * @returns {boolean} true if an animation/transition detected, otherwise false
+     */
+    function hasCssAnimation(el) {
+
+        // get a collection of all children including self
+        var items = [el].concat(Array.prototype.slice.call(el.getElementsByTagName('*')));
+
+        // go through each item in reverse (faster)
+        //for (var i = items.length; i--;) {
+        for (var i = 0, l = items.length; i < l; i++) {
+
+            // get the applied styles
+            var style = window.getComputedStyle(items[i], null);
+
+            // read the animation/transition duration - defaults to 0
+            var animDuration = parseFloat(style.getPropertyValue('animation-duration') || '0');
+            var transDuration = parseFloat(style.getPropertyValue('transition-duration') || '0');
+
+            // if we have any duration greater than 0, an animation exists
+            if (animDuration > 0 || transDuration > 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Removes an element from the dom by CSS selector
      * @access private
      * @param {HTMLElement} parent - html element to look within
@@ -505,10 +547,10 @@
         var el = document.createElement('div');
 
         var transitions = {
-            'transition': 'transitionend',
-            'OTransition': 'otransitionend',  // oTransitionEnd in very old Opera
-            'MozTransition': 'transitionend',
-            'WebkitTransition': 'webkitTransitionEnd'
+            transition: 'transitionend',
+            OTransition: 'otransitionend',  // oTransitionEnd in very old Opera
+            MozTransition: 'transitionend',
+            WebkitTransition: 'webkitTransitionEnd'
         };
 
         for (var i in transitions) {
@@ -519,6 +561,31 @@
 
         return '';
     }
+
+    /**
+     * Works out the name for the 'animationend' for current browser
+     * @returns {string} animation end event name
+     */
+    function getAnimationEndEventName() {
+
+        var el = document.createElement('div');
+
+        var animations = {
+            animation: 'animationend',
+            OAnimation: 'oAnimationEnd',
+            MozAnimation: 'animationend',
+            WebkitAnimation: 'webkitAnimationEnd'
+        };
+
+        for (var i in animations) {
+            if (animations.hasOwnProperty(i) && el.style[i] !== undefined) {
+                return animations[i];
+            }
+        }
+
+        return '';
+    }
+
 
     // patch CustomEvent to allow constructor creation (IE/Chrome) - resolved once initCustomEvent no longer exists
     if ('initCustomEvent' in document.createEvent('CustomEvent')) {
