@@ -205,15 +205,17 @@
             self.removeAttribute('modal');
             self.setAttribute('closing', 'true');
 
-            // wait for transition to end if we have one
-            self.addEventListener(transitionEndEventName, function(e) {
+            var closedHandler = function(e) {
                 self.dispatchEvent(new CustomEvent('pure-dialog-closed', { bubbles: true, cancelable: true }));
-            });
+                self.removeEventListener(transitionEndEventName, closedHandler);
+                self.removeEventListener(animationEndEventName, closedHandler);
+            };
+
+            // wait for transition to end if we have one
+            self.addEventListener(transitionEndEventName, closedHandler);
 
             // wait for animation to end if we have one
-            self.addEventListener(animationEndEventName, function(e) {
-                self.dispatchEvent(new CustomEvent('pure-dialog-closed', { bubbles: true, cancelable: true }));
-            });
+            self.addEventListener(animationEndEventName, closedHandler);
 
             // if we dont have any animations/transitions - fire close event immediately
             if (!hasCssAnimation(self)) {
@@ -585,7 +587,6 @@
 
         return '';
     }
-
 
     // patch CustomEvent to allow constructor creation (IE/Chrome) - resolved once initCustomEvent no longer exists
     if ('initCustomEvent' in document.createEvent('CustomEvent')) {
