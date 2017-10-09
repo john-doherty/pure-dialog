@@ -308,6 +308,10 @@
             this._body.appendChild(this.removeChild(this.firstChild));
         }
 
+        // add title and buttons in case they already exist
+        renderTitle.call(this);
+        renderButtons.call(this);
+
         // append the new container
         this.appendChild(this._container);
     }
@@ -332,7 +336,7 @@
             }
         }
         else {
-            // remove close button
+            // remove title element if we have no value
             removeElementBySelector(this, '.pure-dialog-title');
         }
     }
@@ -371,6 +375,8 @@
 
                     var el = e.target;
 
+                    e.preventDefault();
+
                     if (el.tagName === 'INPUT' && el.className.indexOf('pure-dialog-button') > -1) {
 
                         var proceedToClose = self.dispatchEvent(new CustomEvent('pure-dialog-button-clicked', { detail: el.value, bubbles: true, cancelable: true }));
@@ -389,7 +395,7 @@
             });
         }
         else {
-            // remove close button
+            // remove buttons container if we have no buttons
             removeElementBySelector(this, '.pure-dialog-buttons');
         }
     }
