@@ -163,13 +163,7 @@
      * @returns {void}
      */
     pureDialog.show = function() {
-
-        var allow = this.dispatchEvent(new CustomEvent('pure-dialog-opening', { bubbles: true, cancelable: true }));
-
-        if (allow) {
-            this.setAttribute('open', 'true');
-            this.dispatchEvent(new CustomEvent('pure-dialog-opened', { bubbles: true, cancelable: true }));
-        }
+        showDialog.call(this, false);
     };
 
     /**
@@ -178,14 +172,7 @@
      * @returns {void}
      */
     pureDialog.showModal = function() {
-
-        var allow = this.dispatchEvent(new CustomEvent('pure-dialog-opening', { bubbles: true, cancelable: true }));
-
-        if (allow) {
-            this.setAttribute('open', 'true');
-            this.setAttribute('modal', 'true');
-            this.dispatchEvent(new CustomEvent('pure-dialog-opened', { bubbles: true, cancelable: true }));
-        }
+        showDialog.call(this, true);
     };
 
     /**
@@ -264,6 +251,44 @@
     /*-----------------*/
     /* PRIVATE METHODS */
     /*-----------------*/
+
+    /**
+     * Handles opening the dialog and waiting for opening animation before firing `opened` event
+     * @param {boolean} modal - should the dialog be opened as a modal
+     * @returns {void}
+     */
+    function showDialog(modal) {
+
+        var self = this;
+        var transitionEndEventName = getTransitionEndEventName();
+        var animationEndEventName = getAnimationEndEventName();
+        var allow = self.dispatchEvent(new CustomEvent('pure-dialog-opening', { bubbles: true, cancelable: true }));
+
+        if (allow) {
+            self.setAttribute('open', 'true');
+
+            if (modal) {
+                self.setAttribute('modal', 'true');
+            }
+
+            var openedHandler = function(e) {
+                self.dispatchEvent(new CustomEvent('pure-dialog-opened', { bubbles: true, cancelable: true }));
+                self.removeEventListener(transitionEndEventName, openedHandler);
+                self.removeEventListener(animationEndEventName, openedHandler);
+            };
+
+            // wait for transition to end if we have one
+            self.addEventListener(transitionEndEventName, openedHandler);
+
+            // wait for animation to end if we have one
+            self.addEventListener(animationEndEventName, openedHandler);
+
+            // if we dont have any animations/transitions - fire close event immediately
+            if (!hasCssAnimation(self)) {
+                self.dispatchEvent(new CustomEvent('pure-dialog-opened', { bubbles: true, cancelable: true }));
+            }
+        }
+    }
 
     /**
      * Render body takes care of creating the core elements and also ensuring the literal html is inserted into a wrapper
@@ -414,8 +439,6 @@
         // get a collection of all children including self
         var items = [el].concat(Array.prototype.slice.call(el.getElementsByTagName('*')));
 
-        // go through each item in reverse (faster)
-        //for (var i = items.length; i--;) {
         for (var i = 0, l = items.length; i < l; i++) {
 
             // get the applied styles
