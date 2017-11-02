@@ -1,7 +1,6 @@
 /*!
  * pure-dialog - v@version@
  * https://github.com/john-doherty/pure-dialog
- * @license MIT
  */
 (function (base, window, document) {
 
