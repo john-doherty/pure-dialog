@@ -4,7 +4,7 @@
 [![Linked In](https://img.shields.io/badge/Linked-In-blue.svg)](https://www.linkedin.com/in/john-i-doherty)
  [![Twitter Follow](https://img.shields.io/twitter/follow/CambridgeMVP.svg?style=social&label=Twitter&style=plastic)](https://twitter.com/CambridgeMVP)
 
-A small _(2KB gzipped)_, self-contained, pure JavaScript modal dialog. Designed to simplify the creation of dialogs in Web and Hybrid Mobile apps.
+A small _(2KB gzipped)_, self-contained, pure JavaScript modal dialog designed to simplify the creation of dialogs in Web and Hybrid Mobile apps.
 
 ```html
 <pure-dialog id="example" title="Pure Dialog Demo" buttons="Absolutely, No">
@@ -153,7 +153,7 @@ dialog.addEventListener('pure-dialog-removing', function(e) {
 
 ### Properties and attributes
 
-Property       | Attribute         | Description                              | Type      | Default
+JS Property    | HTML Attribute    | Description                              | Type      | Default
 -------------- | ----------------- | ---------------------------------------- | --------- | --------
 title          | `title`           | Get/set the dialog title                 | _string_  | _empty_
 buttons        | `buttons`         | Get/set comma separated list of buttons  | _string_  | _empty_
