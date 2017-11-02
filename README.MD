@@ -2,12 +2,9 @@
 
 [![Shippable branch](https://img.shields.io/shippable/594ab4e4febbde0700daa804/master.svg)](https://app.shippable.com/projects/594ab4e4febbde0700daa804)
 [![Linked In](https://img.shields.io/badge/Linked-In-blue.svg)](https://www.linkedin.com/in/john-i-doherty)
-[![Twitter Follow][twitter-image]][twitter-url]
+ [![Twitter Follow](https://img.shields.io/twitter/follow/CambridgeMVP.svg?style=social&label=Twitter&style=plastic)](https://twitter.com/CambridgeMVP)
 
-[twitter-image]:https://img.shields.io/twitter/follow/CambridgeMVP.svg?style=social&label=Follow%20me
-[twitter-url]:https://twitter.com/CambridgeMVP
-
-HTML dialog web component written in pure JavaScript to simplify the creation of dialogs in Web and Hybrid Mobile apps. For example:
+A small _(2KB gzipped)_, self-contained, pure JavaScript modal dialog. Designed to simplify the creation of dialogs in Web and Hybrid Mobile apps.
 
 ```html
 <pure-dialog id="example" title="Pure Dialog Demo" buttons="Absolutely, No">
@@ -33,14 +30,11 @@ Try the [demo](https://codepen.io/anon/pen/bRrbMe)
       <li><a href="#properties-and-attributes">Properties and attributes</a></li>
       <li><a href="#styling">Styling</a></li>
     </ul>
-    <li><a href="#contribute">Contribute</a></li>
-    <ul>
-      <li><a href="#local-development">Local development</a></li>
-      <li><a href="#testing">Testing</a></li>
-      <li><a href="#update-min-files">Update .min files</a></li>
-    </ul>
-    <li><a href="#reporting-bugs">Reporting bugs</a></li>
-    <li><a href="#pull-requests">Pull requests</a></li>
+    <li><a href="#unit-tests">Unit Tests</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#star-the-repo">Start the repo</a></li>
+    <li><a href="#history">History</a></li>
+    <li><a href="#license">License</a></li>
 </details>
 
 ## How to use
@@ -204,55 +198,28 @@ To change the style of a particular button, you could use its value as a selecto
 #example input[value="Absolutely"] { background: #880000; }
 ```
 
-## Contribute
+## Unit Tests
 
-### Local development
+1. Checkout using `git clone https://github.com/john-doherty/pure-dialog`
+2. Navigate into project folder `cd pure-dialog`
+3. Install dependencies `npm install`
+4. Run the tests `npm test`
 
-The project includes everything needed to continue development, including a node webserver. If you'd like to help out, run the following to get started:
+## Contributing
 
-```bash
-git clone https://github.com/john-doherty/pure-dialog
-cd pure-dialog
-npm install
-npm start
-```
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -m 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request
 
-Then visit [http://localhost:8080](http://localhost:8080) in your browser.
+## Start the repo
 
-### Testing
+If you find this useful, start the repo - it let's me know people consider it a worthy project and motivates me to continue development :)
 
-The project includes Unit Test. To run tests, execute the following from within the pure-dialog folder:
+## History
 
-```bash
-npm install
-npm test
-```
-
-Tests are written using [jsdom](https://github.com/tmpvar/jsdom)/[jasmine](https://github.com/mhevery/jasmine-node) and are broken into 3 files:
-
-| Filename                        | Description
-| ------------------------------- | ---------------------------------------------------------------------------------------
-| `pure-dialog-interface-spec.js` | Check properties, methods and defaults are exposed
-| `pure-dialog-method-spec.js`    | Executes methods and verifies functionality by inspecting output
-| `pure-dialog-rendering-spec.js` | Various rendering checks
-
-### Update .min files
-
-The minified [pure-dialog.min.js](dist/pure-dialog.min.js) and [pure-dialog.min.css](dist/pure-dialog.min.css) files included in this project are the latest version. To generate new .min files, execute the following:
-
-```bash
-npm run build
-```
-
-The version number is picked up from the `package.json` file.
-
-## Reporting bugs
-
-If you find a bug, please create an [issue](https://github.com/john-doherty/pure-dialog/issues) and include a [jsfiddle](https://jsfiddle.net) or [CodePen](https://codepen.io/anon/pen/bRrbMe) if possible.
-
-## Pull requests
-
-Please ensure your work is covered with unit test(s) and your code follows the ESLint coding style defined in the [package.json](package.json) file.
+For change-log, check [releases](https://github.com/john-doherty/pure-dialog/releases).
 
 ## License
 

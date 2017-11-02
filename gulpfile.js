@@ -1,7 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
-var minifyJs = require('gulp-minify');
+var uglify = require('gulp-uglify');
 var cleanCSS = require('gulp-clean-css');
 var gulpCssDataUri = require('gulp-css-base64');
 var rename = require('gulp-rename');
@@ -16,15 +16,16 @@ gulp.task('clean', function () {
 
 gulp.task('build-js', function () {
     return gulp.src('./src/*.js')
-        .pipe(minifyJs({
-            noSource: true,
-            ext: {
-                min: '.min.js'
+        .pipe(uglify({
+            compress: {
+                passes: 2
             },
-            preserveComments: 'some',
-            exclude: ['tasks']
+            output: {
+                comments: /^!/
+            }
         }))
         .pipe(replace(new RegExp('@version@', 'g'), pjson.version))
+        .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest('dist'));
 });
 

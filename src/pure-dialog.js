@@ -1,8 +1,6 @@
 /*!
  * pure-dialog - v@version@
- * HTML dialog web component written in pure JavaScript
  * https://github.com/john-doherty/pure-dialog
- * @author John Doherty <www.johndoherty.info>
  * @license MIT
  */
 (function (base, window, document) {
