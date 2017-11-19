@@ -213,9 +213,9 @@ To change the style of a particular button, you could use its value as a selecto
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request
 
-## Start the repo
+## Star the repo
 
-If you find this useful, start the repo - it let's me know people consider it a worthy project and motivates me to continue development :)
+If you find this useful, star the repo, it motivates me to continue development :)
 
 ## History
 
