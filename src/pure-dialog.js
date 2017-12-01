@@ -117,6 +117,8 @@
         // if remove on close is set, remove it
         self.addEventListener('pure-dialog-closed', function(e) {
 
+            self.removeAttribute('open');
+            self.removeAttribute('modal');
             self.removeAttribute('closing');
 
             if (e.target.removeOnClose) {
@@ -185,8 +187,8 @@
         var allow = self.dispatchEvent(new CustomEvent('pure-dialog-closing', { bubbles: true, cancelable: true }));
 
         if (allow) {
-            self.removeAttribute('open');
-            self.removeAttribute('modal');
+            //self.removeAttribute('open');
+            //self.removeAttribute('modal');
             self.setAttribute('closing', 'true');
 
             var closedHandler = function(e) {
