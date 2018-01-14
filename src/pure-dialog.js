@@ -120,6 +120,7 @@
             self.removeAttribute('open');
             self.removeAttribute('modal');
             self.removeAttribute('closing');
+            console.log(e.type);
 
             if (e.target.removeOnClose) {
                 e.target.remove();
@@ -182,29 +183,54 @@
     pureDialog.close = function() {
 
         var self = this;
+
+        // if we've already started closing, exit
+        if (self.getAttribute('closing') === 'true') return;
+
         var transitionEndEventName = getTransitionEndEventName();
         var animationEndEventName = getAnimationEndEventName();
         var allow = self.dispatchEvent(new CustomEvent('pure-dialog-closing', { bubbles: true, cancelable: true }));
 
+        console.trace('closing...');
+
         if (allow) {
             //self.removeAttribute('open');
             //self.removeAttribute('modal');
+
+            // this has to come first as adding the attribute probably introduces the transition/animation
             self.setAttribute('closing', 'true');
 
+            // if we have transitions/animations set complete to false so we hook up events
+            var cssTransitionComplete = !hasCssTransition(self); // does it have a transition
+            var cssAnimationComplete = !hasCssAnimation(self);    // does it have an animation
+
             var closedHandler = function(e) {
-                self.dispatchEvent(new CustomEvent('pure-dialog-closed', { bubbles: true, cancelable: true }));
-                self.removeEventListener(transitionEndEventName, closedHandler);
-                self.removeEventListener(animationEndEventName, closedHandler);
+
+                console.log(e.type);
+
+                if (e.type === transitionEndEventName) {
+                    cssTransitionComplete = true;
+                    self.removeEventListener(transitionEndEventName, closedHandler);
+                }
+
+                if (e.type === animationEndEventName) {
+                    cssAnimationComplete = true;
+                    self.removeEventListener(animationEndEventName, closedHandler);
+                }
+
+                if (cssTransitionComplete && cssAnimationComplete) {
+                    self.dispatchEvent(new CustomEvent('pure-dialog-closed', { bubbles: true, cancelable: true }));
+                }
             };
 
             // wait for transition to end if we have one
-            self.addEventListener(transitionEndEventName, closedHandler);
+            if (!cssTransitionComplete) self.addEventListener(transitionEndEventName, closedHandler);
 
             // wait for animation to end if we have one
-            self.addEventListener(animationEndEventName, closedHandler);
+            if (!cssAnimationComplete) self.addEventListener(animationEndEventName, closedHandler);
 
-            // if we dont have any animations/transitions - fire close event immediately
-            if (!hasCssAnimation(self)) {
+            // if we dont have any animations/transitions, or they completed super fast - fire close event immediately
+            if (cssTransitionComplete && cssAnimationComplete) {
                 self.dispatchEvent(new CustomEvent('pure-dialog-closed', { bubbles: true, cancelable: true }));
             }
         }
@@ -264,26 +290,45 @@
         var allow = self.dispatchEvent(new CustomEvent('pure-dialog-opening', { bubbles: true, cancelable: true }));
 
         if (allow) {
+
+            // this has to come first as adding the attribute probably introduces the transition/animation
             self.setAttribute('open', 'true');
 
             if (modal) {
                 self.setAttribute('modal', 'true');
             }
 
+            // if we have transitions/animations set complete to false so we hook up events
+            var cssTransitionComplete = !hasCssTransition(self); // does it have a transition
+            var cssAnimationComplete = !hasCssAnimation(self);    // does it have an animation
+
             var openedHandler = function(e) {
-                self.dispatchEvent(new CustomEvent('pure-dialog-opened', { bubbles: true, cancelable: true }));
-                self.removeEventListener(transitionEndEventName, openedHandler);
-                self.removeEventListener(animationEndEventName, openedHandler);
+
+                console.log(e.type);
+
+                if (e.type === transitionEndEventName) {
+                    cssTransitionComplete = true;
+                    self.removeEventListener(transitionEndEventName, openedHandler);
+                }
+
+                if (e.type === animationEndEventName) {
+                    cssAnimationComplete = true;
+                    self.removeEventListener(animationEndEventName, openedHandler);
+                }
+
+                if (cssTransitionComplete && cssAnimationComplete) {
+                    self.dispatchEvent(new CustomEvent('pure-dialog-opened', { bubbles: true, cancelable: true }));
+                }
             };
 
-            // wait for transition to end if we have one
-            self.addEventListener(transitionEndEventName, openedHandler);
+            // wait for transition to end (it will be true if we have no transition)
+            if (!cssTransitionComplete) self.addEventListener(transitionEndEventName, openedHandler);
 
-            // wait for animation to end if we have one
-            self.addEventListener(animationEndEventName, openedHandler);
+            // wait for animation to end (it will be true if we have no animation)
+            if (!cssAnimationComplete) self.addEventListener(animationEndEventName, openedHandler);
 
-            // if we dont have any animations/transitions - fire close event immediately
-            if (!hasCssAnimation(self)) {
+            // if we dont have any animations/transitions, or they completed super fast - fire close event immediately
+            if (cssTransitionComplete && cssAnimationComplete) {
                 self.dispatchEvent(new CustomEvent('pure-dialog-opened', { bubbles: true, cancelable: true }));
             }
         }
@@ -435,9 +480,34 @@
     /*------------------------*/
 
     /**
+     * Determine if an element of any or its children have a CSS transition applied
+     * @param {HTMLElement} el - element to inspect
+     * @returns {boolean} true if an transition detected, otherwise false
+     */
+    function hasCssTransition(el) {
+
+        // get a collection of all children including self
+        var items = [el].concat(Array.prototype.slice.call(el.getElementsByTagName('*')));
+
+        for (var i = 0, l = items.length; i < l; i++) {
+
+            // get the applied styles
+            var style = window.getComputedStyle(items[i], null);
+
+            // read the transition duration - defaults to 0
+            var transDuration = parseFloat(style.getPropertyValue('transition-duration') || '0');
+
+            // if we have a duration greater than 0, a transition exists
+            return (transDuration > 0);
+        }
+
+        return false;
+    }
+
+    /**
      * Determine if an element of any or its children have a CSS animation applied
      * @param {HTMLElement} el - element to inspect
-     * @returns {boolean} true if an animation/transition detected, otherwise false
+     * @returns {boolean} true if an animation detected, otherwise false
      */
     function hasCssAnimation(el) {
 
@@ -449,14 +519,11 @@
             // get the applied styles
             var style = window.getComputedStyle(items[i], null);
 
-            // read the animation/transition duration - defaults to 0
+            // read the animation duration - defaults to 0
             var animDuration = parseFloat(style.getPropertyValue('animation-duration') || '0');
-            var transDuration = parseFloat(style.getPropertyValue('transition-duration') || '0');
 
-            // if we have any duration greater than 0, an animation exists
-            if (animDuration > 0 || transDuration > 0) {
-                return true;
-            }
+            // if we have a duration greater than 0, an animation exists
+            return (animDuration > 0);
         }
 
         return false;
