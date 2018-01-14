@@ -120,7 +120,6 @@
             self.removeAttribute('open');
             self.removeAttribute('modal');
             self.removeAttribute('closing');
-            console.log(e.type);
 
             if (e.target.removeOnClose) {
                 e.target.remove();
@@ -191,11 +190,7 @@
         var animationEndEventName = getAnimationEndEventName();
         var allow = self.dispatchEvent(new CustomEvent('pure-dialog-closing', { bubbles: true, cancelable: true }));
 
-        console.trace('closing...');
-
         if (allow) {
-            //self.removeAttribute('open');
-            //self.removeAttribute('modal');
 
             // this has to come first as adding the attribute probably introduces the transition/animation
             self.setAttribute('closing', 'true');
@@ -205,8 +200,6 @@
             var cssAnimationComplete = !hasCssAnimation(self);    // does it have an animation
 
             var closedHandler = function(e) {
-
-                console.log(e.type);
 
                 if (e.type === transitionEndEventName) {
                     cssTransitionComplete = true;
@@ -303,8 +296,6 @@
             var cssAnimationComplete = !hasCssAnimation(self);    // does it have an animation
 
             var openedHandler = function(e) {
-
-                console.log(e.type);
 
                 if (e.type === transitionEndEventName) {
                     cssTransitionComplete = true;
