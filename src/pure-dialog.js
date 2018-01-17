@@ -128,6 +128,15 @@
     };
 
     /**
+     * Executes when the element is appended to the DOM
+     * @access private
+     * @returns {void}
+     */
+    pureDialog.attachedCallback = function() {
+        this.dispatchEvent(new CustomEvent('pure-dialog-ready', { bubbles: true, cancelable: true }));
+    };
+
+    /**
      * Executes when any pure-dialog attribute is changed
      * @access private
      * @type {Event}

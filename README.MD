@@ -176,6 +176,15 @@ dialog.addEventListener('pure-dialog-removing', function(e) {
 });
 ```
 
+#### pure-dialog-ready
+
+```js
+// executes when the element is ready for interaction
+dialog.addEventListener('pure-dialog-ready', function(e) {
+  console.log(e.target.id) // log dialog id
+});
+```
+
 ### Properties and attributes
 
 JS Property    | HTML Attribute    | Description                              | Type      | Default
