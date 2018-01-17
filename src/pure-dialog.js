@@ -219,7 +219,7 @@
                     cssAnimationComplete = true;
                     self.removeEventListener(animationEndEventName, closedHandler);
                 }
-
+                //debugger;
                 if (cssTransitionComplete && cssAnimationComplete) {
                     self.dispatchEvent(new CustomEvent('pure-dialog-closed', { bubbles: true, cancelable: true }));
                 }
@@ -486,8 +486,11 @@
      */
     function hasCssTransition(el) {
 
-        // get a collection of all children including self
-        var items = [el].concat(Array.prototype.slice.call(el.getElementsByTagName('*')));
+        // items to inspect for transitions
+        var items = [el];
+
+        // add container element
+        items.push(el.querySelector('.pure-dialog-container'));
 
         for (var i = 0, l = items.length; i < l; i++) {
 
@@ -511,8 +514,11 @@
      */
     function hasCssAnimation(el) {
 
-        // get a collection of all children including self
-        var items = [el].concat(Array.prototype.slice.call(el.getElementsByTagName('*')));
+        // items to inspect for animation
+        var items = [el];
+
+        // add container element
+        items.push(el.querySelector('.pure-dialog-container'));
 
         for (var i = 0, l = items.length; i < l; i++) {
 
