@@ -358,6 +358,8 @@
 
         // append the new container
         this.appendChild(this._container);
+
+        self.dispatchEvent(new CustomEvent('pure-dialog-body-rendered', { bubbles: true, cancelable: true }));
     }
 
     /**
@@ -383,6 +385,8 @@
             // remove title element if we have no value
             removeElementBySelector(this, '.pure-dialog-title');
         }
+
+        self.dispatchEvent(new CustomEvent('pure-dialog-title-rendered', { bubbles: true, cancelable: true }));
     }
 
     /**
@@ -442,6 +446,8 @@
             // remove buttons container if we have no buttons
             removeElementBySelector(this, '.pure-dialog-buttons');
         }
+
+        self.dispatchEvent(new CustomEvent('pure-dialog-buttons-rendered', { bubbles: true, cancelable: true }));
     }
 
     /**

@@ -185,6 +185,12 @@ dialog.addEventListener('pure-dialog-ready', function(e) {
 });
 ```
 
+### TODO: document these events
+
+ * pure-dialog-body-rendered
+ * pure-dialog-title-rendered
+ * pure-dialog-buttons-rendered
+
 ### Properties and attributes
 
 JS Property    | HTML Attribute    | Description                              | Type      | Default
