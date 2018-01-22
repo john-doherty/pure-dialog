@@ -190,11 +190,10 @@
      */
     pureDialog.close = function() {
 
-        var self = this;
-
         // if we've already started closing, exit
-        if (self.getAttribute('closing') === 'true') return;
+        if (this.getAttribute('closing') === 'true') return;
 
+        var self = this;
         var transitionEndEventName = getTransitionEndEventName();
         var animationEndEventName = getAnimationEndEventName();
         var allow = self.dispatchEvent(new CustomEvent('pure-dialog-closing', { bubbles: true, cancelable: true }));
@@ -285,6 +284,9 @@
      * @returns {void}
      */
     function showDialog(modal) {
+
+        // if we've already started open, exit
+        if (this.getAttribute('open') === 'true') return;
 
         var self = this;
         var transitionEndEventName = getTransitionEndEventName();
