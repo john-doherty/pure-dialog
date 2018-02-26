@@ -7,7 +7,7 @@
 A small _(3.3kb gzipped)_, self-contained, pure JavaScript modal dialog designed to simplify the creation of dialogs in Web and Hybrid Mobile apps.
 
 ```html
-<pure-dialog id="example" title="Pure Dialog Demo" buttons="Absolutely, No">
+<pure-dialog id="example" data-title="Pure Dialog Demo" buttons="Absolutely, No">
 Is this project worth a star?
 </pure-dialog>
 ```
@@ -46,7 +46,7 @@ _If your browser does not support Web Components you will need to add the  [docu
 ### In HTML
 
 ```html
-<pure-dialog id="example" title="Pure Dialog Demo" buttons="Absolutely, No">
+<pure-dialog id="example" data-title="Pure Dialog Demo" buttons="Absolutely, No">
 Is this project worth a star?
 </pure-dialog>
 ```
@@ -195,7 +195,7 @@ dialog.addEventListener('pure-dialog-ready', function(e) {
 
 JS Property    | HTML Attribute    | Description                              | Type      | Default
 -------------- | ----------------- | ---------------------------------------- | --------- | --------
-title          | `title`           | Get/set the dialog title                 | _string_  | _empty_
+title          | `data-title`      | Get/set the dialog title                 | _string_  | _empty_
 buttons        | `buttons`         | Get/set comma separated list of buttons  | _string_  | _empty_
 closeButton    | `close-button`    | If true, renders a close button          | _boolean_ | `false`
 removeOnClose  | `remove-on-close` | If true, remove dialog from DOM on close | _boolean_ | `false`
@@ -220,7 +220,7 @@ dialog.body.textContent = 'Hello World';  // set inner text via body tag
 `pure-dialog` was designed to be light and so only produces the following output, making it easy to style:
 
 ```html
-<pure-dialog id="example" title="Pure Dialog Demo" buttons="Absolutely, No">
+<pure-dialog id="example" data-title="Pure Dialog Demo" buttons="Absolutely, No">
   <div class="pure-dialog-container">
     <div class="pure-dialog-title">Pure Dialog Demo</div>
     <div class="pure-dialog-body">Is this project worth a star?</div>

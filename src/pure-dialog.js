@@ -24,10 +24,10 @@
         /** @property {string} pure-dialog.title - title of the dialog */
         title: {
             get: function () {
-                return this.getAttribute('title') || '';
+                return this.getAttribute('data-title') || '';
             },
             set: function (value) {
-                this.setAttribute('title', value);
+                this.setAttribute('data-title', value);
             }
         },
 
@@ -151,7 +151,7 @@
 
         switch (attrName) {
 
-            case 'title': {
+            case 'data-title': {
                 renderTitle.call(this);
             } break;
 
