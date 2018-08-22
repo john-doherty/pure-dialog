@@ -186,9 +186,10 @@
     /**
      * Closes/hides the dialog
      * @access public
+     * @param {bool} suppressCloseEvent - do not fire pure-dialog-closed event if true
      * @returns {void}
      */
-    pureDialog.close = function() {
+    pureDialog.close = function(suppressCloseEvent) {
 
         // if we've already started closing, exit
         if (this.getAttribute('closing') === 'true') return;
@@ -219,7 +220,7 @@
                     self.removeEventListener(animationEndEventName, closedHandler);
                 }
                 //debugger;
-                if (cssTransitionComplete && cssAnimationComplete) {
+                if (!suppressCloseEvent && cssTransitionComplete && cssAnimationComplete) {
                     self.dispatchEvent(new CustomEvent('pure-dialog-closed', { bubbles: true, cancelable: true }));
                 }
             };
@@ -231,7 +232,7 @@
             if (!cssAnimationComplete) self.addEventListener(animationEndEventName, closedHandler);
 
             // if we dont have any animations/transitions, or they completed super fast - fire close event immediately
-            if (cssTransitionComplete && cssAnimationComplete) {
+            if (!suppressCloseEvent && cssTransitionComplete && cssAnimationComplete) {
                 self.dispatchEvent(new CustomEvent('pure-dialog-closed', { bubbles: true, cancelable: true }));
             }
         }
