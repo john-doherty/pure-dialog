@@ -43,7 +43,7 @@
                     return (index === all.indexOf(item));
                 });
 
-                this.setAttribute('buttons', uniqueValue);
+                this.setAttribute('buttons', uniqueValue.join(this.buttonValueSeparator));
             }
         },
 
