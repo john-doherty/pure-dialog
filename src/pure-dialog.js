@@ -39,11 +39,21 @@
             set: function (value) {
 
                 // remove duplicates
-                var uniqueValue = (value || '').split(',').filter(function(item, index, all) {
+                var uniqueValue = (value || '').split(this.buttonValueSeparator).filter(function(item, index, all) {
                     return (index === all.indexOf(item));
                 });
 
                 this.setAttribute('buttons', uniqueValue);
+            }
+        },
+
+        /** @property {string} pure-dialog.buttonValueSeparator - character used to separate button values */
+        buttonValueSeparator: {
+            get: function () {
+                return this.getAttribute('button-value-separator') || ',';
+            },
+            set: function (value) {
+                this.setAttribute('button-value-separator', value);
             }
         },
 
@@ -155,6 +165,7 @@
                 renderTitle.call(this);
             } break;
 
+            // case 'button-value-separator':
             case 'buttons': {
                 renderButtons.call(this);
             } break;
@@ -401,7 +412,7 @@
         var self = this;
 
         // convert buttons to array removing empty strings
-        var buttons = this.buttons.split(',').filter(Boolean);
+        var buttons = this.buttons.split(self.buttonValueSeparator).filter(Boolean);
 
         if (buttons.length > 0) {
 
@@ -418,7 +429,7 @@
             else {
 
                 // create & insert container
-                buttonContainer = createEl(this._container, 'div', { 'class': 'pure-dialog-buttons' });
+                buttonContainer = createEl(this._container, 'div', { class: 'pure-dialog-buttons' });
 
                 // listen for button click events
                 buttonContainer.addEventListener(mouseClick, function(e) {

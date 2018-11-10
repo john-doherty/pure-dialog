@@ -47,18 +47,18 @@
         <script>
             function createDialogViaJs() {
 
-                var dialog = document.createElement('pure-dialog');
+                // var dialog = document.createElement('pure-dialog');
 
-                dialog.title = "Created via JS";
-                dialog.buttons = 'Okay';
-                dialog.removeOnClose = true;
+                // dialog.title = "Created via JS";
+                // dialog.buttons = 'Okay';
+                // dialog.removeOnClose = true;
 
-                dialog.addEventListener('pure-dialog-button-clicked', function(e) {
-                    alert(e.detail + ' clicked!');
-                });
+                // dialog.addEventListener('pure-dialog-button-clicked', function(e) {
+                //     alert(e.detail + ' clicked!');
+                // });
                 
-                dialog.appendToDOM();
-                dialog.showModal();
+                // dialog.appendToDOM();
+                // dialog.showModal();
             }
         </script>
         <script>
@@ -130,7 +130,7 @@
             This won't show anything visually. You need to use JavaScript APIs to show / hide it.
         </p>
 <pre>
-&lt;pure-dialog id="example" title="Pure Dialog Demo" buttons="Absolutely, No, Maybe"&gt;
+&lt;pure-dialog id="example" data-title="Pure Dialog Demo" buttons="Absolutely, No, Maybe"&gt;
     Is this project worth a star?
 &lt;/pure-dialog&gt;
 </pre>
@@ -156,7 +156,7 @@ document.addEventListener('pure-dialog-button-clicked', function(e) {
             alert(e.detail + ' clicked!');
         });
     </script>
-    <pure-dialog id="example" title="Pure Dialog Demo" buttons="Absolutely, No, Maybe">
+    <pure-dialog id="example" data-title="Pure Dialog Demo" button-value-separator='|' buttons="Absolutely| No| Maybe">
         Is this project worth a star?
     </pure-dialog>
     </body>

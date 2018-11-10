@@ -4,7 +4,7 @@
 [![Linked In](https://img.shields.io/badge/Linked-In-blue.svg)](https://www.linkedin.com/in/john-i-doherty)
  [![Twitter Follow](https://img.shields.io/twitter/follow/MrJohnDoherty.svg?style=social&label=Twitter&style=plastic)](https://twitter.com/MrJohnDoherty)
 
-A small _(3.3kb gzipped)_, self-contained, pure JavaScript modal dialog designed to simplify the creation of dialogs in Web and Hybrid Mobile apps.
+A small _(3.3kb)_, self-contained, pure JavaScript modal dialog designed to simplify the creation of dialogs in Web and Hybrid Mobile apps.
 
 ```html
 <pure-dialog id="example" data-title="Pure Dialog Demo" buttons="Absolutely, No">
@@ -62,6 +62,7 @@ dialog.id = 'example';
 dialog.title = 'Pure Dialog Demo';
 dialog.innerHTML = 'Is this project worth a star?';
 dialog.buttons = 'Absolutely, No';
+dialog.buttonValueSeparator = ',';
 dialog.closeButton = false;
 
 // append to DOM
@@ -193,21 +194,23 @@ dialog.addEventListener('pure-dialog-ready', function(e) {
 
 ### Properties and attributes
 
-JS Property    | HTML Attribute    | Description                              | Type      | Default
--------------- | ----------------- | ---------------------------------------- | --------- | --------
-title          | `data-title`      | Get/set the dialog title                 | _string_  | _empty_
-buttons        | `buttons`         | Get/set comma separated list of buttons  | _string_  | _empty_
-closeButton    | `close-button`    | If true, renders a close button          | _boolean_ | `false`
-removeOnClose  | `remove-on-close` | If true, remove dialog from DOM on close | _boolean_ | `false`
-autoClose      | `auto-close`      | auto close when button clicked           | _boolean_ | `true`
-innerHTML      | _n/a_             | Injects HTML into body of dialog         | _string_  | _empty_
-body           | _n/a_             | Gets dialog inner body tag               | _object_  | null
+JS Property          | HTML Attribute           | Description                                     | Type      | Default
+-------------------- | ------------------------ | ----------------------------------------------- | --------- | --------
+title                | `data-title`             | Get/set the dialog title                        | _string_  | _empty_
+buttons              | `buttons`                | Get/set comma separated list of buttons         | _string_  | _empty_
+buttonValueSeparator | `button-value-separator` | Get/set character to use to split button values | _string_  | `,`
+closeButton          | `close-button`           | If true, renders a close button                 | _boolean_ | `false`
+removeOnClose        | `remove-on-close`        | If true, remove dialog from DOM on close        | _boolean_ | `false`
+autoClose            | `auto-close`             | auto close when button clicked                  | _boolean_ | `true`
+innerHTML            | _n/a_                    | Injects HTML into body of dialog                | _string_  | _empty_
+body                 | _n/a_                    | Gets dialog inner body tag                      | _object_  | null
 
 Assuming `var dialog = document.getElementById('example')`:
 
 ```js
 dialog.title = 'Pure Dialog Demo';        // set title
-dialog.buttons = 'Absolutely, No';        // set buttons
+dialog.buttons = 'Absolutely|No';         // set buttons
+dialog.buttonValueSeparator = '|';        // button values are separated by pipe
 dialog.closeButton = true;                // set close button visibility
 dialog.removeOnClose = true;              // remove dialog from DOM on close
 dialog.autoClose = false;                 // do not auto close when button clicked
