@@ -26,8 +26,7 @@ pure-dialog[status="open"] {
     opacity: 1;
 }
 
-pure-dialog[status="opening"][modal],
-pure-dialog[status="open"][modal] {
+pure-dialog[open][modal] {
     position: absolute;
     top: 0;
     right: 0;
