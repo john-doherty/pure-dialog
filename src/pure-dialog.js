@@ -216,7 +216,6 @@
         if (allow) {
 
             // this has to come first as adding the attribute probably introduces the transition/animation
-            self.removeAttribute('open');
             self.setAttribute('closing', 'true');
 
             // if we have transitions/animations set complete to false so we hook up events
