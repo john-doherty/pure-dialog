@@ -135,6 +135,10 @@
                 e.target.remove();
             }
         });
+
+        self.addEventListener('pure-dialog-opened', function(e) {
+            self.removeAttribute('opening');
+        });
     };
 
     /**
@@ -212,6 +216,7 @@
         if (allow) {
 
             // this has to come first as adding the attribute probably introduces the transition/animation
+            self.removeAttribute('open');
             self.setAttribute('closing', 'true');
 
             // if we have transitions/animations set complete to false so we hook up events
@@ -306,6 +311,8 @@
 
         if (allow) {
 
+            self.setAttribute('opening', 'true');
+
             // this has to come first as adding the attribute probably introduces the transition/animation
             self.setAttribute('open', 'true');
 
@@ -340,7 +347,7 @@
             // wait for animation to end (it will be true if we have no animation)
             if (!cssAnimationComplete) self.addEventListener(animationEndEventName, openedHandler);
 
-            // if we dont have any animations/transitions, or they completed super fast - fire close event immediately
+            // if we don't have any animations/transitions, or they completed super fast - fire close event immediately
             if (cssTransitionComplete && cssAnimationComplete) {
                 self.dispatchEvent(new CustomEvent('pure-dialog-opened', { bubbles: true, cancelable: true }));
             }
