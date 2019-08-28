@@ -47,19 +47,35 @@ describe('pure-dialog methods', function () {
         });
     });
 
-    it('should add [open] attribute when .show() is called', function(done) {
+    it('should set status=open when .show() is called', function(done) {
 
         var el = document.createElement('pure-dialog');
 
         el.addEventListener('pure-dialog-opened', function(e) {
             expect(this).toEqual(el);
             expect(e.target).toEqual(el);
-            expect(e.target.getAttribute('open')).toEqual('true');
+            expect(e.target.getAttribute('status')).toEqual('open');
             expect(e.target.getAttribute('modal')).toBe(null);
             done();
         });
 
         el.show();
+    });
+
+    it('should set status=closed when .close() is called', function(done) {
+
+        var el = document.createElement('pure-dialog');
+
+        el.addEventListener('pure-dialog-closed', function(e) {
+            expect(this).toEqual(el);
+            expect(e.target).toEqual(el);
+            expect(e.target.getAttribute('status')).toEqual('closed');
+            expect(e.target.getAttribute('modal')).toBe(null);
+            done();
+        });
+
+        el.show();
+        el.close();
     });
 
     it('should add [open][modal] attributes when .showModal() is called', function(done) {

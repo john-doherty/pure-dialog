@@ -127,13 +127,17 @@
         // if remove on close is set, remove it
         self.addEventListener('pure-dialog-closed', function(e) {
 
-            self.removeAttribute('open');
+            self.setAttribute('status', 'closed');
             self.removeAttribute('modal');
-            self.removeAttribute('closing');
 
             if (e.target.removeOnClose) {
                 e.target.remove();
             }
+        });
+
+        // once open, removing the opening property
+        self.addEventListener('pure-dialog-opened', function(e) {
+            self.setAttribute('status', 'open');
         });
     };
 
@@ -202,7 +206,7 @@
     pureDialog.close = function() {
 
         // if we've already started closing, exit
-        if (this.getAttribute('closing') === 'true') return;
+        if (this.getAttribute('status') === 'closing' || this.getAttribute('status') === 'closed') return;
 
         var self = this;
         var transitionEndEventName = getTransitionEndEventName();
@@ -212,7 +216,7 @@
         if (allow) {
 
             // this has to come first as adding the attribute probably introduces the transition/animation
-            self.setAttribute('closing', 'true');
+            self.setAttribute('status', 'closing');
 
             // if we have transitions/animations set complete to false so we hook up events
             var cssTransitionComplete = !hasCssTransition(self); // does it have a transition
@@ -241,7 +245,7 @@
             // wait for animation to end if we have one
             if (!cssAnimationComplete) self.addEventListener(animationEndEventName, closedHandler);
 
-            // if we dont have any animations/transitions, or they completed super fast - fire close event immediately
+            // if we don't have any animations/transitions, or they completed super fast - fire close event immediately
             if (cssTransitionComplete && cssAnimationComplete) {
                 self.dispatchEvent(new CustomEvent('pure-dialog-closed', { bubbles: true, cancelable: true }));
             }
@@ -297,7 +301,7 @@
     function showDialog(modal) {
 
         // if we've already started open, exit
-        if (this.getAttribute('open') === 'true') return;
+        if (this.getAttribute('status') === 'opening' || this.getAttribute('status') === 'open') return;
 
         var self = this;
         var transitionEndEventName = getTransitionEndEventName();
@@ -307,7 +311,7 @@
         if (allow) {
 
             // this has to come first as adding the attribute probably introduces the transition/animation
-            self.setAttribute('open', 'true');
+            self.setAttribute('status', 'opening');
 
             if (modal) {
                 self.setAttribute('modal', 'true');
@@ -315,7 +319,7 @@
 
             // if we have transitions/animations set complete to false so we hook up events
             var cssTransitionComplete = !hasCssTransition(self); // does it have a transition
-            var cssAnimationComplete = !hasCssAnimation(self);    // does it have an animation
+            var cssAnimationComplete = !hasCssAnimation(self); // does it have an animation
 
             var openedHandler = function(e) {
 
@@ -340,7 +344,7 @@
             // wait for animation to end (it will be true if we have no animation)
             if (!cssAnimationComplete) self.addEventListener(animationEndEventName, openedHandler);
 
-            // if we dont have any animations/transitions, or they completed super fast - fire close event immediately
+            // if we don't have any animations/transitions, or they completed super fast - fire close event immediately
             if (cssTransitionComplete && cssAnimationComplete) {
                 self.dispatchEvent(new CustomEvent('pure-dialog-opened', { bubbles: true, cancelable: true }));
             }
