@@ -14,14 +14,7 @@ pure-dialog {
     font-family: tahoma;
 }
 
-pure-dialog[status="closing"],
-pure-dialog[status="closed"] {
-    visibility: hidden;
-    opacity: 0;
-}
-
-pure-dialog[status="opening"],
-pure-dialog[status="open"] {
+pure-dialog[open] {
     visibility: visible;
     opacity: 1;
 }
