@@ -675,10 +675,10 @@
         var el = document.createElement('div');
 
         var transitions = {
+            WebkitTransition: 'webkitTransitionEnd',
             transition: 'transitionend',
-            OTransition: 'otransitionend',  // oTransitionEnd in very old Opera
             MozTransition: 'transitionend',
-            WebkitTransition: 'webkitTransitionEnd'
+            OTransition: 'otransitionend'  // oTransitionEnd in very old Opera
         };
 
         for (var i in transitions) {
@@ -699,10 +699,10 @@
         var el = document.createElement('div');
 
         var animations = {
+            WebkitAnimation: 'webkitAnimationEnd',
             animation: 'animationend',
-            OAnimation: 'oAnimationEnd',
             MozAnimation: 'animationend',
-            WebkitAnimation: 'webkitAnimationEnd'
+            OAnimation: 'oAnimationEnd'
         };
 
         for (var i in animations) {
