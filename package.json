@@ -1,6 +1,6 @@
 {
   "name": "pure-dialog",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "<pure-dialog> is a 3k, self-contained, pure JavaScript dialog",
   "main": "dev-server.js",
   "scripts": {

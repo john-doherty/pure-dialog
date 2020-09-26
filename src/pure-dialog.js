@@ -382,18 +382,18 @@
     }
 
     /**
-     * Adds/removes dialog title based on this.title value
+     * Adds/removes dialog title based on this.dataset.title value
      * @access private
      * @returns {void}
      */
     function renderTitle() {
 
-        if (this.title !== '') {
+        if (this.dataset.title !== '') {
 
             // either get existing title tag or create a new one
             var el = this.querySelector('.pure-dialog-title') || createEl(null, 'div', { class: 'pure-dialog-title' });
 
-            el.textContent = this.title;
+            el.textContent = this.dataset.title;
 
             // if its not in the DOM, append it in the correct location
             if (!el.parentElement) {
