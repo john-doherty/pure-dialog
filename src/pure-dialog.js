@@ -24,7 +24,8 @@
         /** @property {string} pure-dialog.title - title of the dialog */
         title: {
             get: function () {
-                return this.getAttribute('data-title') || '';
+                // get title from data-title attribute
+                return (this.dataset || {}).title || this.getAttribute('data-title') || '';
             },
             set: function (value) {
                 this.setAttribute('data-title', value);
@@ -382,18 +383,18 @@
     }
 
     /**
-     * Adds/removes dialog title based on this.dataset.title value
+     * Adds/removes dialog title based on .title property
      * @access private
      * @returns {void}
      */
     function renderTitle() {
 
-        if (this.dataset.title !== '') {
+        if (this.title !== '') {
 
             // either get existing title tag or create a new one
             var el = this.querySelector('.pure-dialog-title') || createEl(null, 'div', { class: 'pure-dialog-title' });
 
-            el.textContent = this.dataset.title;
+            el.textContent = this.title;
 
             // if its not in the DOM, append it in the correct location
             if (!el.parentElement) {
