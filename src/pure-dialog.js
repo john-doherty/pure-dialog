@@ -714,10 +714,10 @@
         return '';
     }
 
-    // patch CustomEvent to allow constructor creation (IE/Chrome) - resolved once initCustomEvent no longer exists
-    if ('initCustomEvent' in document.createEvent('CustomEvent')) {
+    // patch CustomEvent to allow constructor creation (IE/Chrome)
+    if (typeof window.CustomEvent !== 'function') {
 
-        window.CustomEvent = function(event, params) {
+        window.CustomEvent = function (event, params) {
 
             params = params || { bubbles: false, cancelable: false, detail: undefined };
 
