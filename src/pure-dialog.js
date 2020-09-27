@@ -369,7 +369,7 @@
         this._body = createEl(this._container, 'div', { class: 'pure-dialog-body' });
 
         // copy all children written literally into the body of the <pure-dialog> HTML tag
-        while (this.hasChildNodes()) {
+        while (this.firstChild !== null) {
             this._body.appendChild(this.removeChild(this.firstChild));
         }
 
