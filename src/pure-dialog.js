@@ -81,11 +81,11 @@
         /** @property {string} pure-dialog.innerHTML - set the dialog body HTML */
         innerHTML: {
             get: function () {
-                return (this.body) ? this.body.innerHTML : '';
+                return (this._body) ? this._body.innerHTML : '';
             },
             set: function (value) {
-                if (this.body) {
-                    this.body.innerHTML = value;
+                if (this._body) {
+                    this._body.innerHTML = value;
                 }
             }
         },
@@ -176,6 +176,7 @@
                 renderButtons.call(this);
             } break;
 
+            case 'closeButton':
             case 'close-button': {
                 renderCloseButton.call(this);
             } break;
