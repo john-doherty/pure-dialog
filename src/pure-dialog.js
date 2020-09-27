@@ -78,8 +78,8 @@
             }
         },
 
-        /** @property {string} pure-dialog.innerHTML - set the dialog body HTML */
-        innerHTML: {
+        /** @property {string} pure-dialog.content - set the dialog body HTML */
+        content: {
             get: function () {
                 return (this._body) ? this._body.innerHTML : '';
             },

@@ -60,6 +60,7 @@ describe('pure-dialog interface', function () {
         var el = document.createElement('pure-dialog');
 
         expect(typeof el.title).toEqual('string');
+        expect(typeof el.content).toEqual('string');
         expect(typeof el.buttons).toEqual('string');
         expect(typeof el.closeButton).toEqual('boolean');
         expect(typeof el.autoClose).toEqual('boolean');
@@ -72,7 +73,7 @@ describe('pure-dialog interface', function () {
         var el = document.createElement('pure-dialog');
 
         expect(el.title).toEqual('');
-        expect(el.innerHTML).toEqual('');
+        expect(el.content).toEqual('');
         expect(el.body).not.toBe(null);
         expect(el.buttons).toEqual('');
         expect(el.closeButton).toEqual(false);
