@@ -166,6 +166,7 @@
 
         switch (attrName) {
 
+            case 'title': // account for the fact .title is changed internally
             case 'data-title': {
                 renderTitle.call(this);
             } break;
