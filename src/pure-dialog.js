@@ -776,7 +776,6 @@
     function stringToDOM(src, parent) {
         var tmp = document.createElement('div');
         var scripts = tmp.getElementsByTagName('script');
-        var i;
 
         parent = parent || document.createDocumentFragment();
 
@@ -784,7 +783,7 @@
         tmp.innerHTML = src;
 
         // remove script tags
-        for (i = scripts.length - 1; i >= 0; i--) {
+        for (var i = scripts.length - 1; i >= 0; i--) {
             scripts[i].parentElement.removeChild(scripts[i]);
         }
 

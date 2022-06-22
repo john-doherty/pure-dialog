@@ -121,6 +121,12 @@
             "no-param-reassign": [
                 "off"
             ],
+            "prefer-object-spread": [
+                "off"
+            ],
+            "vars-on-top": [
+                "off"
+            ],
             "no-lone-blocks": [
                 "off"
             ],
