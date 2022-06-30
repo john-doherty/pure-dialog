@@ -1,165 +1,184 @@
 {
-  "name": "pure-dialog",
-  "version": "1.5.0",
-  "description": "<pure-dialog> is a 3k, self-contained, pure JavaScript dialog",
-  "main": "dev-server.js",
-  "scripts": {
-    "start": "node server/dev-server.js",
-    "test": "jasmine-node tests --verbose --color --forceexit --junitreport || true",
-    "_test": "DEBUG=nock.* jasmine-node tests --verbose --color --forceexit --junitreport || true",
-    "build": "node_modules/gulp/bin/gulp.js build",
-    "clean": "node_modules/gulp/bin/gulp.js clean"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/john-doherty/pure-dialog.git"
-  },
-  "bugs": {
-    "url": "https://github.com/john-doherty/pure-dialog/issues"
-  },
-  "keywords": [
-    "pure-dialog",
-    "dialog",
-    "popunder",
-    "webcomponent"
-  ],
-  "license": "MIT",
-  "engines": {
-    "node": ">= 6.11.0"
-  },
-  "author": "John Doherty <contact@johndoherty.info> (www.johndoherty.info)",
-  "devDependencies": {
-    "cors": "^2.8.5",
-    "del": "2.2.2",
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb-base": "^11.2.0",
-    "eslint-plugin-import": "^2.2.0",
-    "express": "4.15.3",
-    "gulp": "3.9.1",
-    "gulp-clean-css": "3.3.1",
-    "gulp-css-base64": "^1.3.4",
-    "gulp-rename": "1.2.2",
-    "gulp-sizereport": "^1.2.1",
-    "gulp-string-replace": "^0.4.0",
-    "gulp-uglify": "^3.0.1",
-    "jasmine-node": "1.14.5",
-    "jsdom": "10.1.0",
-    "nock": "^9.0.13",
-    "run-sequence": "1.2.2"
-  },
-  "eslintConfig": {
-    "extends": "airbnb-base",
-    "env": {
-      "es6": true,
-      "jasmine": true,
-      "node": true,
-      "browser": true
+    "name": "pure-dialog",
+    "version": "1.5.0",
+    "description": "<pure-dialog> is a 3k, self-contained, pure JavaScript dialog",
+    "main": "dev-server.js",
+    "scripts": {
+        "start": "node server/dev-server.js",
+        "test": "jasmine tests/*-spec.js --reporter=jasmine-console-reporter",
+        "_test": "DEBUG=nock.* jasmine-node tests --verbose --color --forceexit --junitreport || true",
+        "build": "node_modules/gulp/bin/gulp.js build",
+        "clean": "node_modules/gulp/bin/gulp.js clean"
     },
-    "globals": {
-      "spyOn": true,
-      "ActiveXObject": true
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/john-doherty/pure-dialog.git"
     },
-    "rules": {
-      "brace-style": [
-        "error",
-        "stroustrup"
-      ],
-      "comma-dangle": [
-        "error",
-        "never"
-      ],
-      "func-names": 0,
-      "indent": [
-        "error",
-        4,
-        {
-          "SwitchCase": 1
+    "bugs": {
+        "url": "https://github.com/john-doherty/pure-dialog/issues"
+    },
+    "keywords": [
+        "pure-dialog",
+        "dialog",
+        "popunder",
+        "webcomponent"
+    ],
+    "license": "MIT",
+    "engines": {
+        "node": ">= 6.11.0"
+    },
+    "author": "John Doherty <contact@johndoherty.info> (www.johndoherty.info)",
+    "devDependencies": {
+        "cors": "^2.8.5",
+        "del": "2.2.2",
+        "eslint": "^8.18.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-import": "^2.26.0",
+        "express": "4.15.3",
+        "gulp": "3.9.1",
+        "gulp-clean-css": "3.3.1",
+        "gulp-css-base64": "^1.3.4",
+        "gulp-rename": "1.2.2",
+        "gulp-sizereport": "^1.2.1",
+        "gulp-string-replace": "^0.4.0",
+        "gulp-uglify": "^3.0.1",
+        "jasmine": "^3.6.4",
+        "jasmine-console-reporter": "^3.1.0",
+        "jasmine-node": "1.14.5",
+        "jsdom": "10.1.0",
+        "nock": "^9.0.13",
+        "prettier": "^2.7.1",
+        "run-sequence": "1.2.2"
+    },
+    "eslintConfig": {
+        "extends": [
+            "airbnb-base",
+            "prettier"
+        ],
+        "parserOptions": {
+            "sourceType": "script",
+            "ecmaVersion": 5
+        },
+        "env": {
+            "es6": false,
+            "jasmine": true,
+            "node": true,
+            "browser": true
+        },
+        "globals": {
+            "fetch": true,
+            "Promise": true,
+            "jasmine": true,
+            "expect": true,
+            "it": true,
+            "spyOn": true,
+            "describe": true,
+            "beforeAll": true,
+            "afterAll": true,
+            "beforeEach": true,
+            "afterEach": true
+        },
+        "ignorePatterns": [
+            "/tests/*.js",
+            "/test/*.js"
+        ],
+        "rules": {
+            "func-names": 0,
+            "new-cap": [
+                "error",
+                {
+                    "capIsNewExceptions": [
+                        "Router",
+                        "ObjectId",
+                        "DEBUG"
+                    ],
+                    "properties": false
+                }
+            ],
+            "no-underscore-dangle": 0,
+            "no-unused-vars": [
+                "warn"
+            ],
+            "no-use-before-define": [
+                "error",
+                {
+                    "functions": false
+                }
+            ],
+            "no-else-return": [
+                "off"
+            ],
+            "no-var": [
+                "off"
+            ],
+            "prefer-destructuring": [
+                "off"
+            ],
+            "one-var": [
+                "off"
+            ],
+            "no-param-reassign": [
+                "off"
+            ],
+            "prefer-object-spread": [
+                "off"
+            ],
+            "vars-on-top": [
+                "off"
+            ],
+            "no-lone-blocks": [
+                "off"
+            ],
+            "padded-blocks": 0,
+            "prefer-template": [
+                "off"
+            ],
+            "prefer-exponentiation-operator": [
+                "off"
+            ],
+            "prefer-rest-params": [
+                "off"
+            ],
+            "prefer-arrow-callback": [
+                "off"
+            ],
+            "default-case": [
+                "off"
+            ],
+            "no-plusplus": [
+                "off"
+            ],
+            "require-jsdoc": [
+                "warn",
+                {
+                    "require": {
+                        "FunctionDeclaration": true,
+                        "MethodDefinition": true,
+                        "ClassDeclaration": true
+                    }
+                }
+            ],
+            "object-shorthand": [
+                "error",
+                "never"
+            ],
+            "space-before-function-paren": "off",
+            "strict": "off",
+            "valid-jsdoc": [
+                "error"
+            ]
         }
-      ],
-      "max-len": [
-        2,
-        180,
-        4,
-        {
-          "ignoreUrls": true,
-          "ignoreComments": false
-        }
-      ],
-      "new-cap": [
-        "error",
-        {
-          "capIsNewExceptions": [
-            "Router",
-            "ObjectId",
-            "DEBUG"
-          ],
-          "properties": false
-        }
-      ],
-      "no-underscore-dangle": 0,
-      "no-unused-vars": [
-        "warn"
-      ],
-      "no-use-before-define": [
-        "error",
-        {
-          "functions": false
-        }
-      ],
-      "no-var": [
-        "off"
-      ],
-      "one-var": [
-        "off"
-      ],
-      "vars-on-top": [
-        "off"
-      ],
-      "no-param-reassign": [
-        "off"
-      ],
-      "no-lone-blocks": [
-        "off"
-      ],
-      "padded-blocks": 0,
-      "prefer-template": [
-        "off"
-      ],
-      "prefer-arrow-callback": [
-        "off"
-      ],
-      "default-case": [
-        "off"
-      ],
-      "wrap-iife": [
-        2,
-        "inside"
-      ],
-      "no-plusplus": [
-        "off"
-      ],
-      "require-jsdoc": [
-        "warn",
-        {
-          "require": {
-            "FunctionDeclaration": true,
-            "MethodDefinition": true,
-            "ClassDeclaration": true
-          }
-        }
-      ],
-      "object-shorthand": [
-        "error",
-        "never"
-      ],
-      "space-before-function-paren": "off",
-      "strict": "off",
-      "valid-jsdoc": [
-        "error"
-      ]
+    },
+    "prettier": {
+        "breakBeforeElse": true,
+        "trailingComma": "es5",
+        "tabWidth": 4,
+        "semi": true,
+        "singleQuote": true,
+        "bracketSpacing": true
+    },
+    "dependencies": {
+        "natives": "^1.1.6"
     }
-  },
-  "dependencies": {
-    "natives": "^1.1.6"
-  }
 }
