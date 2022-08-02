@@ -31,9 +31,9 @@
   "devDependencies": {
     "cors": "^2.8.5",
     "del": "2.2.2",
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb-base": "^11.2.0",
-    "eslint-plugin-import": "^2.2.0",
+    "eslint": "^8.21.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
     "express": "4.15.3",
     "gulp": "3.9.1",
     "gulp-clean-css": "3.3.1",
@@ -48,118 +48,162 @@
     "run-sequence": "1.2.2"
   },
   "eslintConfig": {
-    "extends": "airbnb-base",
-    "env": {
-      "es6": true,
-      "jasmine": true,
-      "node": true,
-      "browser": true
-    },
-    "globals": {
-      "spyOn": true,
-      "ActiveXObject": true
-    },
-    "rules": {
-      "brace-style": [
-        "error",
-        "stroustrup"
-      ],
-      "comma-dangle": [
-        "error",
-        "never"
-      ],
-      "func-names": 0,
-      "indent": [
-        "error",
-        4,
-        {
-          "SwitchCase": 1
+        "extends": [
+            "airbnb-base"
+        ],
+        "parserOptions": {
+            "sourceType": "script",
+            "ecmaVersion": 5
+        },
+        "env": {
+            "es6": false,
+            "jasmine": true,
+            "node": true,
+            "browser": true
+        },
+        "globals": {
+            "fetch": true,
+            "Promise": true,
+            "jasmine": true,
+            "expect": true,
+            "it": true,
+            "spyOn": true,
+            "describe": true,
+            "beforeAll": true,
+            "afterAll": true,
+            "beforeEach": true,
+            "afterEach": true
+        },
+        "ignorePatterns": [
+            "/tests/*.js",
+            "/test/*.js",
+            "*.min.js"
+        ],
+        "rules": {
+            "func-names": 0,
+            "new-cap": [
+                "error",
+                {
+                    "capIsNewExceptions": [
+                        "Router",
+                        "ObjectId",
+                        "DEBUG"
+                    ],
+                    "properties": false
+                }
+            ],
+            "no-underscore-dangle": 0,
+            "no-unused-vars": [
+                "warn"
+            ],
+            "vars-on-top": [
+                "off"
+            ],
+            "no-unneeded-ternary": ["warn"],
+            "no-use-before-define": [
+                "error",
+                {
+                    "functions": false
+                }
+            ],
+            "no-else-return": [
+                "off"
+            ],
+            "no-var": [
+                "off"
+            ],
+            "prefer-destructuring": [
+                "off"
+            ],
+            "one-var": [
+                "off"
+            ],
+            "no-param-reassign": [
+                "off"
+            ],
+            "prefer-object-spread": [
+                "off"
+            ],
+            "no-lone-blocks": [
+                "off"
+            ],
+            "padded-blocks": 0,
+            "prefer-template": [
+                "off"
+            ],
+            "prefer-exponentiation-operator": [
+                "off"
+            ],
+            "prefer-rest-params": [
+                "off"
+            ],
+            "prefer-arrow-callback": [
+                "off"
+            ],
+            "default-case": [
+                "off"
+            ],
+            "no-plusplus": [
+                "off"
+            ],
+            "require-jsdoc": [
+                "warn",
+                {
+                    "require": {
+                        "FunctionDeclaration": true,
+                        "MethodDefinition": true,
+                        "ClassDeclaration": true
+                    }
+                }
+            ],
+            "object-shorthand": [
+                "error",
+                "never"
+            ],
+            "space-before-function-paren": "off",
+            "strict": "off",
+            "valid-jsdoc": [
+                "error"
+            ],
+            "max-len": [
+                2,
+                180,
+                4,
+                {
+                "ignoreUrls": true,
+                "ignoreComments": false
+                }
+            ],
+            "comma-dangle": ["warn", "never"],
+            "comma-spacing": ["warn"],
+            "dot-location": ["warn", "property"],
+            "newline-per-chained-call": "warn",
+            "no-multiple-empty-lines": ["warn", {
+                "max": 3
+            }],
+            "semi": "warn",
+            "no-lonely-if": "warn",
+            "no-useless-return": "warn",
+            "radix": "warn",
+            "spaced-comment": "warn",
+            "block-spacing": "warn",
+            "brace-style": ["warn", "stroustrup"],
+						"indent": ["error", 4, {"MemberExpression": "off"}],
+            "key-spacing": ["warn", { "afterColon": true }],
+            "keyword-spacing": ["warn", { "before": true, "after": true }],
+            "no-multi-spaces": "warn",
+            "object-curly-spacing": "warn",
+            "operator-linebreak": "off",
+            "space-before-blocks": "warn",
+            "switch-colon-spacing": "warn",
+            "eqeqeq": "warn",
+            "no-unsafe-negation": "warn",
+            "valid-typeof": "error",
+            "wrap-iife": [2, "inside"],
+            "function-call-argument-newline": ["warn", "never"]
         }
-      ],
-      "max-len": [
-        2,
-        180,
-        4,
-        {
-          "ignoreUrls": true,
-          "ignoreComments": false
-        }
-      ],
-      "new-cap": [
-        "error",
-        {
-          "capIsNewExceptions": [
-            "Router",
-            "ObjectId",
-            "DEBUG"
-          ],
-          "properties": false
-        }
-      ],
-      "no-underscore-dangle": 0,
-      "no-unused-vars": [
-        "warn"
-      ],
-      "no-use-before-define": [
-        "error",
-        {
-          "functions": false
-        }
-      ],
-      "no-var": [
-        "off"
-      ],
-      "one-var": [
-        "off"
-      ],
-      "vars-on-top": [
-        "off"
-      ],
-      "no-param-reassign": [
-        "off"
-      ],
-      "no-lone-blocks": [
-        "off"
-      ],
-      "padded-blocks": 0,
-      "prefer-template": [
-        "off"
-      ],
-      "prefer-arrow-callback": [
-        "off"
-      ],
-      "default-case": [
-        "off"
-      ],
-      "wrap-iife": [
-        2,
-        "inside"
-      ],
-      "no-plusplus": [
-        "off"
-      ],
-      "require-jsdoc": [
-        "warn",
-        {
-          "require": {
-            "FunctionDeclaration": true,
-            "MethodDefinition": true,
-            "ClassDeclaration": true
-          }
-        }
-      ],
-      "object-shorthand": [
-        "error",
-        "never"
-      ],
-      "space-before-function-paren": "off",
-      "strict": "off",
-      "valid-jsdoc": [
-        "error"
-      ]
-    }
-  },
-  "dependencies": {
+    },  
+    "dependencies": {
     "natives": "^1.1.6"
   }
 }
