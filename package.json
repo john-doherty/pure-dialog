@@ -1,60 +1,55 @@
 {
-    "name": "pure-dialog",
-    "version": "1.5.0",
-    "description": "<pure-dialog> is a 3k, self-contained, pure JavaScript dialog",
-    "main": "dev-server.js",
-    "scripts": {
-        "start": "node server/dev-server.js",
-        "test": "jasmine tests/*-spec.js --reporter=jasmine-console-reporter",
-        "_test": "DEBUG=nock.* jasmine-node tests --verbose --color --forceexit --junitreport || true",
-        "build": "node_modules/gulp/bin/gulp.js build",
-        "clean": "node_modules/gulp/bin/gulp.js clean"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/john-doherty/pure-dialog.git"
-    },
-    "bugs": {
-        "url": "https://github.com/john-doherty/pure-dialog/issues"
-    },
-    "keywords": [
-        "pure-dialog",
-        "dialog",
-        "popunder",
-        "webcomponent"
-    ],
-    "license": "MIT",
-    "engines": {
-        "node": ">= 6.11.0"
-    },
-    "author": "John Doherty <contact@johndoherty.info> (www.johndoherty.info)",
-    "devDependencies": {
-        "cors": "^2.8.5",
-        "del": "2.2.2",
-        "eslint": "^8.18.0",
-        "eslint-config-airbnb-base": "^15.0.0",
-        "eslint-config-prettier": "^8.5.0",
-        "eslint-plugin-import": "^2.26.0",
-        "express": "4.15.3",
-        "gulp": "3.9.1",
-        "gulp-clean-css": "3.3.1",
-        "gulp-css-base64": "^1.3.4",
-        "gulp-rename": "1.2.2",
-        "gulp-sizereport": "^1.2.1",
-        "gulp-string-replace": "^0.4.0",
-        "gulp-uglify": "^3.0.1",
-        "jasmine": "^3.6.4",
-        "jasmine-console-reporter": "^3.1.0",
-        "jasmine-node": "1.14.5",
-        "jsdom": "10.1.0",
-        "nock": "^9.0.13",
-        "prettier": "^2.7.1",
-        "run-sequence": "1.2.2"
-    },
-    "eslintConfig": {
+  "name": "pure-dialog",
+  "version": "1.5.0",
+  "description": "<pure-dialog> is a 3k, self-contained, pure JavaScript dialog",
+  "main": "dev-server.js",
+  "scripts": {
+    "start": "node server/dev-server.js",
+    "test": "jasmine-node tests --verbose --color --forceexit --junitreport || true",
+    "_test": "DEBUG=nock.* jasmine-node tests --verbose --color --forceexit --junitreport || true",
+    "build": "node_modules/gulp/bin/gulp.js build",
+    "clean": "node_modules/gulp/bin/gulp.js clean"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/john-doherty/pure-dialog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/john-doherty/pure-dialog/issues"
+  },
+  "keywords": [
+    "pure-dialog",
+    "dialog",
+    "popunder",
+    "webcomponent"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 6.11.0"
+  },
+  "author": "John Doherty <contact@johndoherty.info> (www.johndoherty.info)",
+  "devDependencies": {
+    "cors": "^2.8.5",
+    "del": "2.2.2",
+    "eslint": "^8.21.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "express": "4.15.3",
+    "gulp": "3.9.1",
+    "gulp-clean-css": "3.3.1",
+    "gulp-css-base64": "^1.3.4",
+    "gulp-rename": "1.2.2",
+    "gulp-sizereport": "^1.2.1",
+    "gulp-string-replace": "^0.4.0",
+    "gulp-uglify": "^3.0.1",
+    "jasmine-node": "1.14.5",
+    "jsdom": "10.1.0",
+    "nock": "^9.0.13",
+    "run-sequence": "1.2.2"
+  },
+  "eslintConfig": {
         "extends": [
-            "airbnb-base",
-            "prettier"
+            "airbnb-base"
         ],
         "parserOptions": {
             "sourceType": "script",
@@ -81,7 +76,8 @@
         },
         "ignorePatterns": [
             "/tests/*.js",
-            "/test/*.js"
+            "/test/*.js",
+            "*.min.js"
         ],
         "rules": {
             "func-names": 0,
@@ -100,6 +96,10 @@
             "no-unused-vars": [
                 "warn"
             ],
+            "vars-on-top": [
+                "off"
+            ],
+            "no-unneeded-ternary": ["warn"],
             "no-use-before-define": [
                 "error",
                 {
@@ -122,9 +122,6 @@
                 "off"
             ],
             "prefer-object-spread": [
-                "off"
-            ],
-            "vars-on-top": [
                 "off"
             ],
             "no-lone-blocks": [
@@ -167,18 +164,46 @@
             "strict": "off",
             "valid-jsdoc": [
                 "error"
-            ]
+            ],
+            "max-len": [
+                2,
+                180,
+                4,
+                {
+                "ignoreUrls": true,
+                "ignoreComments": false
+                }
+            ],
+            "comma-dangle": ["warn", "never"],
+            "comma-spacing": ["warn"],
+            "dot-location": ["warn", "property"],
+            "newline-per-chained-call": "warn",
+            "no-multiple-empty-lines": ["warn", {
+                "max": 3
+            }],
+            "semi": "warn",
+            "no-lonely-if": "warn",
+            "no-useless-return": "warn",
+            "radix": "warn",
+            "spaced-comment": "warn",
+            "block-spacing": "warn",
+            "brace-style": ["warn", "stroustrup"],
+						"indent": ["error", 4, {"MemberExpression": "off"}],
+            "key-spacing": ["warn", { "afterColon": true }],
+            "keyword-spacing": ["warn", { "before": true, "after": true }],
+            "no-multi-spaces": "warn",
+            "object-curly-spacing": "warn",
+            "operator-linebreak": "off",
+            "space-before-blocks": "warn",
+            "switch-colon-spacing": "warn",
+            "eqeqeq": "warn",
+            "no-unsafe-negation": "warn",
+            "valid-typeof": "error",
+            "wrap-iife": [2, "inside"],
+            "function-call-argument-newline": ["warn", "never"]
         }
-    },
-    "prettier": {
-        "breakBeforeElse": true,
-        "trailingComma": "es5",
-        "tabWidth": 4,
-        "semi": true,
-        "singleQuote": true,
-        "bracketSpacing": true
-    },
+    },  
     "dependencies": {
-        "natives": "^1.1.6"
-    }
+    "natives": "^1.1.6"
+  }
 }
