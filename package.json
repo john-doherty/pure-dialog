@@ -43,7 +43,7 @@
     "gulp-string-replace": "^0.4.0",
     "gulp-uglify": "^3.0.1",
     "jasmine-node": "1.14.5",
-    "jsdom": "10.1.0",
+    "jsdom": "16.5.0",
     "nock": "^9.0.13",
     "run-sequence": "1.2.2"
   },
