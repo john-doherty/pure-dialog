@@ -14,15 +14,16 @@ pure-dialog {
     opacity: 0;
 }
 
+pure-dialog[open] {
+    visibility: visible;
+    opacity: 1;
+}
+
 pure-dialog[closing] {
     visibility: hidden;
     opacity: 0;
 }
 
-pure-dialog[open] {
-    visibility: visible;
-    opacity: 1;
-}
 
 pure-dialog[open][modal] {
     position: absolute;
