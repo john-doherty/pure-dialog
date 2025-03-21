@@ -200,6 +200,7 @@ buttonValueSeparator | `button-value-separator` | Get/set character to use to sp
 closeButton          | `close-button`           | If true, renders a close button                 | _boolean_ | `false`
 removeOnClose        | `remove-on-close`        | If true, remove dialog from DOM on close        | _boolean_ | `false`
 autoClose            | `auto-close`             | auto close when button clicked                  | _boolean_ | `true`
+translate            | `translate`              | Should translation be applied                   | _boolean_ | `true`
 content              | _n/a_                    | Injects HTML into body of dialog                | _string_  | _empty_
 body                 | _n/a_                    | Gets dialog inner body tag                      | _object_  | null
 
@@ -212,6 +213,7 @@ dialog.buttonValueSeparator = '|';        // button values are separated by pipe
 dialog.closeButton = true;                // set close button visibility
 dialog.removeOnClose = true;              // remove dialog from DOM on close
 dialog.autoClose = false;                 // do not auto close when button clicked
+dialog.translate = false;                 // do not translate content
 dialog.content = 'Hello World!';          // set dialog body HTML
 dialog.body.textContent = 'Hello World';  // set inner text via body tag
 ```
