@@ -61,16 +61,6 @@ describe('pure-dialog rendering', function () {
         expect(el.querySelectorAll('.pure-dialog-title').length).toBe(1);
     });
 
-    it('should set translate=yes on container by default', function() {
-
-        var title1 = 'Title1-' + (new Date()).getTime();
-        var el = document.createElement('pure-dialog');
-
-        el.title = title1;
-
-        expect(el.querySelector('.pure-dialog-container').getAttribute('translate')).toBe('yes');
-    });
-
     it('should set translate=yes on container if translate property is true', function() {
 
         var title1 = 'Title1-' + (new Date()).getTime();

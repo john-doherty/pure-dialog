@@ -381,9 +381,6 @@
         // create container
         this._container = createEl(null, 'div', { class: 'pure-dialog-container' });
 
-        // ensure translate=yes exists by default
-        this._container.setAttribute('translate', (this.translate === true) ? 'yes' : 'no');
-
         // create a body element wrapper
         this._body = createEl(this._container, 'div', { class: 'pure-dialog-body' });
 
