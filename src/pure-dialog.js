@@ -105,6 +105,15 @@
             set: function (value) {
                 this.setAttribute('remove-on-close', value === true);
             }
+        },
+
+        translate: {
+            get: function () {
+                return this.getAttribute('translate') !== 'no'; // defaults to true
+            },
+            set: function (value) {
+                this.setAttribute('translate', value === true ? 'yes' : 'no');
+            }
         }
     });
 
@@ -179,6 +188,12 @@
             case 'closeButton':
             case 'close-button': {
                 renderCloseButton.call(this);
+            } break;
+
+            case 'translate': {
+                if (this._container) {
+                    this._container.setAttribute('translate', (this.translate === true) ? 'yes' : 'no');
+                }
             } break;
         }
     };
@@ -605,6 +620,10 @@
                 // assign id
                 else if (key === 'id') {
                     el.id = attrs[key];
+                }
+                // assign translate
+                else if (key === 'translate') {
+                    el.translate = attrs[key];
                 }
                 // assign name attribute, even for customEl
                 else if (key === 'name') {
