@@ -610,6 +610,11 @@
         var el = document.createElement(tagName);
         var customEl = tagName.indexOf('-') > 0;
 
+        // @NOTE: this needs to happen first so translate attributes are respected
+        if (parentEl) {
+            parentEl.appendChild(el);
+        }
+
         if (attrs) {
 
             for (var key in attrs) {
@@ -647,10 +652,6 @@
         if (typeof html !== 'undefined') {
             el.innerHTML = '';
             stringToDOM(html, el);
-        }
-
-        if (parentEl) {
-            parentEl.appendChild(el);
         }
 
         return el;
