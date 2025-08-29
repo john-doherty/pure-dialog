@@ -464,7 +464,7 @@
 
                     if (el.tagName === 'INPUT' && el.className.indexOf('pure-dialog-button') > -1) {
 
-                        var proceedToClose = self.dispatchEvent(new CustomEvent('pure-dialog-button-clicked', { detail: el.value, bubbles: true, cancelable: true, srcEl: el }));
+                        var proceedToClose = self.dispatchEvent(new CustomEvent('pure-dialog-button-clicked', { detail: el.value, bubbles: true, cancelable: true }));
 
                         if (self.autoClose && proceedToClose) {
                             self.close();
