@@ -114,6 +114,16 @@
             set: function (value) {
                 this.setAttribute('translate', value === true ? 'yes' : 'no');
             }
+        },
+
+        /** @property {string} pure-dialog.buttonProxySelector - css selector for inner buttons to proxy */
+        buttonProxySelector: {
+            get: function () {
+                return this.getAttribute('button-proxy-selector') || '';
+            },
+            set: function (value) {
+                this.setAttribute('button-proxy-selector', value || '');
+            }
         }
     });
 
@@ -148,6 +158,32 @@
 
         self.addEventListener('pure-dialog-opened', function(e) {
             self.removeAttribute('opening');
+        });
+
+        self.addEventListener('pure-dialog-opening', function(e) {
+
+            // proxy buttons if required
+            if (self._container && self._body && self.buttonProxySelector) {
+
+                var buttonContainer = self._container.querySelector('.pure-dialog-buttons');
+                var buttonsToProxy = [].slice.call(self._body.querySelectorAll(self.buttonProxySelector));
+
+                for (var i = 0, l = buttonsToProxy.length; i < l; i++) {
+
+                    var buttonToProxy = buttonsToProxy[i];
+                    var buttonToProxyId = newUniqueId('proxyButton');
+
+                    // hide source button and assign ID so we can reach it
+                    buttonToProxy.style.display = 'none';
+                    buttonToProxy.setAttribute('data-proxy-id', buttonToProxyId);
+
+                    // create a proxy button to add to the dialog
+                    var proxyButton = createEl(null, 'input', { type: 'button', value: buttonToProxy.value, class: 'pure-dialog-button', 'data-proxy-target': buttonToProxyId });
+                    buttonContainer.insertBefore(proxyButton, buttonContainer.firstChild);
+                }
+
+                // console.log('buttonsToProxy', buttonsToProxy);
+            }
         });
     };
 
@@ -464,10 +500,18 @@
 
                     if (el.tagName === 'INPUT' && el.className.indexOf('pure-dialog-button') > -1) {
 
-                        var proceedToClose = self.dispatchEvent(new CustomEvent('pure-dialog-button-clicked', { detail: el.value, bubbles: true, cancelable: true }));
+                        // if this button is a proxy for another, suppress this click and fire on target
+                        var buttonProxyTarget = el.getAttribute('data-proxy-target');
+                        if (buttonProxyTarget) {
+                            var targetButton = self.querySelector('[data-proxy-id="' +buttonProxyTarget + '"]');
+                            fireEvent(targetButton, mouseClick);
+                        }
+                        else {
+                            var proceedToClose = self.dispatchEvent(new CustomEvent('pure-dialog-button-clicked', { detail: el.value, bubbles: true, cancelable: true }));
 
-                        if (self.autoClose && proceedToClose) {
-                            self.close();
+                            if (self.autoClose && proceedToClose) {
+                                self.close();
+                            }
                         }
                     }
                 });
@@ -735,6 +779,47 @@
         }
 
         return '';
+    }
+
+    /**
+     * Generate unique id scoped to this environment
+     * @param {string} [prefix] - optional prefix for the id
+     * @returns {string} unique id string
+     */
+    function newUniqueId(prefix) {
+        prefix = prefix || 'uid';
+        newUniqueId._counters = newUniqueId._counters || {};
+        newUniqueId._counters[prefix] = (newUniqueId._counters[prefix] || 0) + 1;
+        return prefix + newUniqueId._counters[prefix];
+    }
+
+    /**
+     * Fire event on element
+     * @param {HTMLElement} el - target element
+     * @param {string} type - event name like click or touchend
+     * @returns {void}
+     */
+    function fireEvent(el, type) {
+        if (!el) return;
+        type = (type || '').replace(/^on/, '');
+
+        // special case for click to trigger default behavior
+        if (type === 'click' && typeof el.click === 'function') {
+            el.click();
+            return;
+        }
+
+        if (document.createEvent) {
+            var e = document.createEvent('Event');
+            e.initEvent(type, true, true);
+            el.dispatchEvent(e);
+        }
+        else if (document.createEventObject) {
+            el.fireEvent('on' + type);
+        }
+        else if (typeof el['on' + type] === 'function') {
+            el['on' + type]();
+        }
     }
 
     // patch CustomEvent to allow constructor creation (IE/Chrome)

@@ -203,6 +203,7 @@ autoClose            | `auto-close`             | auto close when button clicked
 translate            | `translate`              | Should translation be applied                   | _boolean_ | `true`
 content              | _n/a_                    | Injects HTML into body of dialog                | _string_  | _empty_
 body                 | _n/a_                    | Gets dialog inner body tag                      | _object_  | null
+buttonProxySelector  | `button-proxy-selector`  | Get/set selector of content buttons to proxy    | _string_  | _empty_
 
 Assuming `var dialog = document.getElementById('example')`:
 
