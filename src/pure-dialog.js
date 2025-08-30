@@ -86,6 +86,7 @@
             set: function (value) {
                 if (this._body) {
                     this._body.innerHTML = value;
+                    updateScrollState(this);
                 }
             }
         },
@@ -162,6 +163,8 @@
 
         self.addEventListener('pure-dialog-opening', function(e) {
 
+            updateScrollState(self);
+
             // proxy buttons if required
             if (self._container && self._body && self.buttonProxySelector) {
 
@@ -181,10 +184,18 @@
                     var proxyButton = createEl(null, 'input', { type: 'button', value: buttonToProxy.value, class: 'pure-dialog-button', 'data-proxy-target': buttonToProxyId });
                     buttonContainer.insertBefore(proxyButton, buttonContainer.firstChild);
                 }
-
-                // console.log('buttonsToProxy', buttonsToProxy);
             }
         });
+
+        window.addEventListener('resize', function resizeHandler() {
+            var connected = (typeof self.isConnected === 'boolean') ? self.isConnected : (document.body && document.body.contains(self));
+            if (!connected) {
+                window.removeEventListener('resize', resizeHandler, false);
+            }
+            else {
+                updateScrollState(self);
+            }
+        }, false);
     };
 
     /**
@@ -414,11 +425,20 @@
      */
     function renderBody() {
 
+        var self = this;
+
         // create container
-        this._container = createEl(null, 'div', { class: 'pure-dialog-container' });
+        self._container = createEl(null, 'div', { class: 'pure-dialog-container' });
 
         // create a body element wrapper
-        this._body = createEl(this._container, 'div', { class: 'pure-dialog-body' });
+        self._body = createEl(self._container, 'div', { class: 'pure-dialog-body' });
+
+        // update `data-body-scroll-state` attribute
+        try {
+            self._body.addEventListener('scroll', function(){ updateScrollState(self); }, { passive: true });
+        } catch (e) {
+            self._body.addEventListener('scroll', function(){ updateScrollState(self); }, false);
+        }
 
         // copy all children written literally into the body of the <pure-dialog> HTML tag
         while (this.firstChild !== null) {
@@ -432,6 +452,8 @@
         // append the new container
         this.appendChild(this._container);
 
+        updateScrollState(self);
+
         self.dispatchEvent(new CustomEvent('pure-dialog-body-rendered', { bubbles: true, cancelable: true }));
     }
 
@@ -441,6 +463,8 @@
      * @returns {void}
      */
     function renderTitle() {
+
+        var self = this;
 
         if (this.title !== '') {
 
@@ -540,16 +564,16 @@
 
         var self = this;
 
-        if (this.closeButton) {
+        if (self.closeButton) {
 
             // add close button
-            var closeButton = createEl(this._container, 'div', { class: 'pure-dialog-close' });
+            var closeButton = createEl(self._container, 'div', { class: 'pure-dialog-close' });
 
             // add close event
             closeButton.addEventListener(mouseClick, function(e) {
                 e.preventDefault();
 
-                var allow = this.dispatchEvent(new CustomEvent('pure-dialog-close-clicked', { bubbles: true, cancelable: true }));
+                var allow = self.dispatchEvent(new CustomEvent('pure-dialog-close-clicked', { bubbles: true, cancelable: true }));
 
                 if (allow) {
                     self.close();
@@ -558,13 +582,42 @@
         }
         else {
             // remove close button
-            removeElementBySelector(this, '.pure-dialog-close');
+            removeElementBySelector(self, '.pure-dialog-close');
         }
     }
 
     /*------------------------*/
     /* PRIVATE HELPER METHODS */
     /*------------------------*/
+
+    /**
+     * Update data-body-scroll-state attribute
+     * @param {HTMLElement} dialog - dialog element
+     * @returns {void} sets data-body-scroll-state to top, middle, bottom or removes if not scrollable
+     */
+    function updateScrollState(dialog) {
+
+        var body = dialog.body;
+
+        if (!body) return;
+
+        if (body.scrollHeight <= body.clientHeight + 1) {
+            dialog.removeAttribute('data-body-scroll-state');
+        }
+        else {
+
+            var value = 'middle';
+
+            if (body.scrollTop <= 0) {
+                value = 'top';
+            }
+            else if (body.scrollTop + body.clientHeight >= body.scrollHeight - 1) {
+                value = 'bottom';
+            }
+
+            dialog.setAttribute('data-body-scroll-state', value);
+        }
+    }
 
     /**
      * Determine if an element of any or its children have a CSS transition applied
@@ -577,9 +630,11 @@
         var items = [el];
 
         // add container element
-        items.push(el.querySelector('.pure-dialog-container'));
+        items.push(el && el.querySelector && el.querySelector('.pure-dialog-container'));
 
         for (var i = 0, l = items.length; i < l; i++) {
+
+            if (!items[i]) { continue; } // skip if not found
 
             // get the applied styles
             var style = window.getComputedStyle(items[i], null);
@@ -588,7 +643,9 @@
             var transDuration = parseFloat(style.getPropertyValue('transition-duration') || '0');
 
             // if we have a duration greater than 0, a transition exists
-            return (transDuration > 0);
+            if (transDuration > 0) {
+                return true;
+            }
         }
 
         return false;
@@ -605,9 +662,11 @@
         var items = [el];
 
         // add container element
-        items.push(el.querySelector('.pure-dialog-container'));
+        items.push(el && el.querySelector && el.querySelector('.pure-dialog-container'));
 
         for (var i = 0, l = items.length; i < l; i++) {
+
+            if (!items[i]) { continue; } // skip if not found
 
             // get the applied styles
             var style = window.getComputedStyle(items[i], null);
@@ -616,7 +675,9 @@
             var animDuration = parseFloat(style.getPropertyValue('animation-duration') || '0');
 
             // if we have a duration greater than 0, an animation exists
-            return (animDuration > 0);
+            if (animDuration > 0) {
+                return true;
+            }
         }
 
         return false;
