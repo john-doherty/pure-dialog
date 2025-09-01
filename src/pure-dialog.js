@@ -174,15 +174,21 @@
                 for (var i = 0, l = buttonsToProxy.length; i < l; i++) {
 
                     var buttonToProxy = buttonsToProxy[i];
-                    var buttonToProxyId = newUniqueId('proxyButton');
+                    var buttonToProxyValue = buttonToProxy.value || '';
 
-                    // hide source button and assign ID so we can reach it
-                    buttonToProxy.style.display = 'none';
-                    buttonToProxy.setAttribute('data-proxy-id', buttonToProxyId);
+                    // only if a button of the same name does not already exist
+                    if (buttonToProxyValue && !buttonContainer.querySelector('.pure-dialog-button[value="' + buttonToProxyValue + '"]')){
 
-                    // create a proxy button to add to the dialog
-                    var proxyButton = createEl(null, 'input', { type: 'button', value: buttonToProxy.value, class: 'pure-dialog-button', 'data-proxy-target': buttonToProxyId });
-                    buttonContainer.insertBefore(proxyButton, buttonContainer.firstChild);
+                        var buttonToProxyId = newUniqueId('proxyButton');
+
+                        // hide source button and assign ID so we can reach it
+                        buttonToProxy.style.display = 'none';
+                        buttonToProxy.setAttribute('data-proxy-id', buttonToProxyId);
+
+                        // create a proxy button to add to the dialog
+                        var proxyButton = createEl(null, 'input', { type: 'button', value: buttonToProxyValue, class: 'pure-dialog-button', 'data-proxy-target': buttonToProxyId });
+                        buttonContainer.insertBefore(proxyButton, buttonContainer.firstChild);
+                    }
                 }
             }
         });
