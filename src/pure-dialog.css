@@ -73,6 +73,10 @@ pure-dialog .pure-dialog-body {
     text-align: center;
 }
 
+pure-dialog .pure-dialog-body [data-proxy-id] {
+    display: none !important;
+}
+
 pure-dialog .pure-dialog-buttons {
     display: flex;
     background: #fff;

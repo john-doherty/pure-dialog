@@ -162,35 +162,8 @@
         });
 
         self.addEventListener('pure-dialog-opening', function(e) {
-
+            applyProxyButtons.call(self);
             updateScrollState(self);
-
-            // proxy buttons if required
-            if (self._container && self._body && self.buttonProxySelector) {
-
-                var buttonContainer = self._container.querySelector('.pure-dialog-buttons');
-                var buttonsToProxy = [].slice.call(self._body.querySelectorAll(self.buttonProxySelector));
-
-                for (var i = 0, l = buttonsToProxy.length; i < l; i++) {
-
-                    var buttonToProxy = buttonsToProxy[i];
-                    var buttonToProxyValue = buttonToProxy.value || '';
-
-                    // only if a button of the same name does not already exist
-                    if (buttonToProxyValue && !buttonContainer.querySelector('.pure-dialog-button[value="' + buttonToProxyValue + '"]')){
-
-                        var buttonToProxyId = newUniqueId('proxyButton');
-
-                        // hide source button and assign ID so we can reach it
-                        buttonToProxy.style.display = 'none';
-                        buttonToProxy.setAttribute('data-proxy-id', buttonToProxyId);
-
-                        // create a proxy button to add to the dialog
-                        var proxyButton = createEl(null, 'input', { type: 'button', value: buttonToProxyValue, class: 'pure-dialog-button', 'data-proxy-target': buttonToProxyId });
-                        buttonContainer.insertBefore(proxyButton, buttonContainer.firstChild);
-                    }
-                }
-            }
         });
 
         window.addEventListener('resize', function resizeHandler() {
@@ -241,6 +214,10 @@
             case 'closeButton':
             case 'close-button': {
                 renderCloseButton.call(this);
+            } break;
+
+            case 'button-proxy-selector': {
+                applyProxyButtons.call(this);
             } break;
 
             case 'translate': {
@@ -589,6 +566,52 @@
         else {
             // remove close button
             removeElementBySelector(self, '.pure-dialog-close');
+        }
+    }
+
+    /**
+     * Injects proxy buttons if set
+     * @returns {void}
+     */
+    function applyProxyButtons() {
+
+        var self = this;
+
+        if (self._container && self._body) {
+
+            var buttonContainer = self._container.querySelector('.pure-dialog-buttons');
+
+            // proxy buttons if required
+            if (self.buttonProxySelector) {
+
+                var buttonsToProxy = [].slice.call(self._body.querySelectorAll(self.buttonProxySelector));
+
+                for (var i = 0, l = buttonsToProxy.length; i < l; i++) {
+
+                    var buttonToProxy = buttonsToProxy[i];
+                    var buttonToProxyValue = buttonToProxy.getAttribute('value') || '';
+                    var existingProxyButton = buttonContainer.querySelector('.pure-dialog-button[value="' + buttonToProxyValue + '"]') || buttonContainer.querySelector('.pure-dialog-button[data-ai18n-value="' + buttonToProxyValue + '"]');
+
+                    console.log('buttonToProxyValue = ', buttonToProxyValue)
+
+                    // only if a button of the same name does not already exist
+                    if (buttonToProxyValue && !existingProxyButton) {
+
+                        var buttonToProxyId = newUniqueId('proxyButton');
+
+                        // assign ID so we can reach it (also hides the button)
+                        buttonToProxy.setAttribute('data-proxy-id', buttonToProxyId);
+
+                        // create a proxy button to add to the dialog
+                        var proxyButton = createEl(null, 'input', { type: 'button', value: buttonToProxyValue, class: 'pure-dialog-button', 'data-proxy-target': buttonToProxyId });
+                        buttonContainer.insertBefore(proxyButton, buttonContainer.firstChild);
+                    }
+                }
+            }
+            // otherwise, remove proxy buttons
+            else {
+                renderButtons.call(self);
+            }
         }
     }
 
