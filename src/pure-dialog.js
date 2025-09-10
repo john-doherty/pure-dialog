@@ -592,8 +592,6 @@
                     var buttonToProxyValue = buttonToProxy.getAttribute('value') || '';
                     var existingProxyButton = buttonContainer.querySelector('.pure-dialog-button[value="' + buttonToProxyValue + '"]') || buttonContainer.querySelector('.pure-dialog-button[data-ai18n-value="' + buttonToProxyValue + '"]');
 
-                    console.log('buttonToProxyValue = ', buttonToProxyValue)
-
                     // only if a button of the same name does not already exist
                     if (buttonToProxyValue && !existingProxyButton) {
 
