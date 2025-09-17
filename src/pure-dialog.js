@@ -570,45 +570,66 @@
     }
 
     /**
-     * Injects proxy buttons if set
-     * @returns {void}
+     * Handles injecting proxy buttons if `.buttonProxySelector` is set
+     * If the body of the dialog contains a button the dev wants to proxy
+     * - we add a unique data-proxy-id to the button to be proxied
+     * - we create a new button in .pure-dialog-buttons with the same value
+     * - we add data-proxy-target to the new button to match the body button
+     * - when a user clicks the proxy button, we send the click to the matching data-proxy-id
+     * @returns {void} - returns nothing
      */
     function applyProxyButtons() {
-
         var self = this;
 
-        if (self._container && self._body) {
+        if (!self._container || !self._body) return;
 
-            var buttonContainer = self._container.querySelector('.pure-dialog-buttons');
+        var buttonContainer = self._container.querySelector('.pure-dialog-buttons');
+        if (!buttonContainer) return;
 
-            // proxy buttons if required
-            if (self.buttonProxySelector) {
+        // if no proxy selector, render normal buttons (wipes previous proxy buttons)
+        if (!self.buttonProxySelector) {
+            renderButtons.call(self);
+            return;
+        }
 
-                var buttonsToProxy = [].slice.call(self._body.querySelectorAll(self.buttonProxySelector));
+        // find all source buttons to proxy
+        var buttons = [].slice.call(self._body.querySelectorAll(self.buttonProxySelector));
 
-                for (var i = 0, l = buttonsToProxy.length; i < l; i++) {
+        for (var i = 0, l = buttons.length; i < l; i++) {
 
-                    var buttonToProxy = buttonsToProxy[i];
-                    var buttonToProxyValue = buttonToProxy.getAttribute('value') || '';
-                    var existingProxyButton = buttonContainer.querySelector('.pure-dialog-button[value="' + buttonToProxyValue + '"]') || buttonContainer.querySelector('.pure-dialog-button[data-ai18n-value="' + buttonToProxyValue + '"]');
+            var srcBtn = buttons[i];
 
-                    // only if a button of the same name does not already exist
-                    if (buttonToProxyValue && !existingProxyButton) {
+            // exit if we have no button value
+            var val = srcBtn.getAttribute('value') || '';
+            if (!val) continue;
 
-                        var buttonToProxyId = newUniqueId('proxyButton');
+            // check if we already have a button matching this value
+            var existing = buttonContainer.querySelector(
+                '.pure-dialog-button[value="' + val + '"], .pure-dialog-button[data-ai18n-value="' + val + '"]'
+            );
 
-                        // assign ID so we can reach it (also hides the button)
-                        buttonToProxy.setAttribute('data-proxy-id', buttonToProxyId);
+            if (existing) {
 
-                        // create a proxy button to add to the dialog
-                        var proxyButton = createEl(null, 'input', { type: 'button', value: buttonToProxyValue, class: 'pure-dialog-button', 'data-proxy-target': buttonToProxyId });
-                        buttonContainer.insertBefore(proxyButton, buttonContainer.firstChild);
-                    }
+                var existingTarget = existing.getAttribute('data-proxy-target') || '';
+
+                // if existing proxy has a target, ensure source points to it
+                if (existingTarget && !srcBtn.getAttribute('data-proxy-id')) {
+                    srcBtn.setAttribute('data-proxy-id', existingTarget);
                 }
             }
-            // otherwise, remove proxy buttons
             else {
-                renderButtons.call(self);
+                // create new proxy when none exists
+                var id = newUniqueId('proxyButton');
+                srcBtn.setAttribute('data-proxy-id', id);
+
+                var proxyBtn = createEl(null, 'input', {
+                    type: 'button',
+                    value: val,
+                    class: 'pure-dialog-button',
+                    'data-proxy-target': id
+                });
+
+                buttonContainer.insertBefore(proxyBtn, buttonContainer.firstChild);
             }
         }
     }
