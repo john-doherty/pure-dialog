@@ -586,7 +586,7 @@
         var buttonContainer = self._container.querySelector('.pure-dialog-buttons');
         if (!buttonContainer) return;
 
-        // if no proxy selector, render normal buttons (wipes pervious proxy buttons)
+        // if no proxy selector, render normal buttons (wipes previous proxy buttons)
         if (!self.buttonProxySelector) {
             renderButtons.call(self);
             return;
