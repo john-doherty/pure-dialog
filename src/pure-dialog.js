@@ -625,7 +625,7 @@
                 var proxyBtn = createEl(null, 'input', {
                     type: 'button',
                     value: val,
-                    'class': 'pure-dialog-button',
+                    class: 'pure-dialog-button',
                     'data-proxy-target': id
                 });
 
