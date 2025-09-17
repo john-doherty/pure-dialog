@@ -575,7 +575,7 @@
      * - we add a unique data-proxy-id to the button to be proxied
      * - we create a new button in .pure-dialog-buttons with the same value
      * - we add data-proxy-target to the new button to match the body button
-     * - when a user clicks the proxy button, we send the click to the matching dataproxy-id
+     * - when a user clicks the proxy button, we send the click to the matching data-proxy-id
      * @returns {void} - returns nothing
      */
     function applyProxyButtons() {
