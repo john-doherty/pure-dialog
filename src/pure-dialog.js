@@ -85,7 +85,7 @@
             },
             set: function (value) {
                 if (this._body) {
-                    this._body.innerHTML = value;
+                    this._body.innerHTML = sanitizeHtml(value);
                     updateScrollState(this);
                 }
             }
@@ -840,6 +840,51 @@
         }
 
         return parent;
+    }
+
+    /**
+     * Cleans HTML string to ensure they're safe for the DOM
+     * @access private
+     * @param {string} src - string containing HTML
+     * @returns {string} cleaned HTML
+     */
+    function sanitizeHtml(src) {
+
+        var tmp = document.createElement('div');
+
+        // inject content into none live element
+        tmp.innerHTML = src;
+
+        // remove script tags
+        var items = tmp.getElementsByTagName('*');
+        for (var i = items.length - 1; i >= 0; i--) {
+
+            var el = items[i];
+
+            if (el.tagName === 'SCRIPT') {
+                el.parentElement.removeChild(el);
+            }
+            else {
+                var attrs = el.attributes;
+
+                for (var ii = 0, ll = attrs.length; ii < ll; ii++) {
+                    var name = attrs[ii].name;
+                    var value = attrs[ii].value || '';
+
+                    // drop on* handlers
+                    if (name.length >= 2 && name.slice(0, 2).toLowerCase() === 'on') {
+                        el.removeAttribute(name);
+                    }
+
+                    // drop javascript: urls
+                    if (typeof value === 'string' && value.toLowerCase().indexOf('javascript:') === 0) {
+                        el.removeAttribute(name);
+                    }
+                }
+            }
+        }
+
+        return tmp.innerHTML;
     }
 
     /**
