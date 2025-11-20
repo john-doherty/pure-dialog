@@ -83,4 +83,15 @@ describe('pure-dialog rendering', function () {
         expect(el.querySelector('.pure-dialog-container').getAttribute('translate')).toBe('no');
     });
 
+    it('should filter out "on" attributes from content html', function() {
+
+        var onAttribute = '<img src="x" onerror="alert(1)">';
+        var el = document.createElement('pure-dialog');
+
+        el.content = onAttribute;
+        var content = el.content;
+
+        expect(el.content).toBe('<img src="x">');
+    });
+
 });
